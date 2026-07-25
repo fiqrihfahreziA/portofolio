@@ -470,8 +470,17 @@ margin-top:40px;
 /* ==========================
 BUTTONS
 ========================== */
+/* ==========================
+BUTTON
+========================== */
 
+.btn,
 button{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
 
     padding:16px 36px;
 
@@ -485,28 +494,39 @@ button{
 
     font-weight:600;
 
-    color:white;
+    color:#fff;
+
+    text-decoration:none;
 
     background:linear-gradient(
-    135deg,
-    #00E5FF,
-    #7C3AED
+        135deg,
+        #00E5FF,
+        #7C3AED
     );
 
-    transition:.4s;
+    transition:all .35s ease;
 
     box-shadow:
-    0 0 25px #00E5FF55;
+        0 0 20px rgba(0,229,255,.35);
 
 }
 
+.btn:hover,
 button:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-6px) scale(1.03);
 
     box-shadow:
-    0 0 30px cyan,
-    0 0 80px #7C3AED;
+        0 0 20px #00E5FF,
+        0 0 40px #7C3AED,
+        0 0 80px rgba(124,58,237,.5);
+
+}
+
+.btn:active,
+button:active{
+
+    transform:scale(.97);
 
 }
 
@@ -514,18 +534,19 @@ button:hover{
 
     background:transparent;
 
-    border:2px solid cyan;
+    border:2px solid #00E5FF;
+
+    color:#fff;
 
 }
 
 .outline:hover{
 
-    background:cyan;
+    background:#00E5FF;
 
     color:#050816;
 
 }
-
 /* ==========================
 HERO IMAGE
 ========================== */
