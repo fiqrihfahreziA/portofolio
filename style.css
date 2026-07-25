@@ -2,26 +2,54 @@
    RESET
 ========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ==========================
+THEME
+========================== */
+
+:root{
+    --bg:#ffffff;
+    --text:#111827;
+    --text2:#4b5563;
+
+    --card:#ffffff;
+    --card2:#f8fafc;
+
+    --glass:rgba(255,255,255,.7);
+
+    --input:#ffffff;
+
+    --border:#d1d5db;
+
+    --shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
+body.dark{
+
+    --bg:#050816;
+    --text:#ffffff;
+    --text2:#B6BCCB;
+
+    --card:#111827;
+    --card2:#1E293B;
+
+    --glass:rgba(255,255,255,.05);
+
+    --input:rgba(255,255,255,.05);
+
+    --border:rgba(255,255,255,.08);
+
+    --shadow:none;
+}
 html{
     scroll-behavior:smooth;
 }
 
 body{
-
     font-family:"Space Grotesk",sans-serif;
-
-    background:#050816;
-
-    color:#fff;
-
+    background:var(--bg);
+    color:var(--text);
     overflow-x:hidden;
-
+    transition:.4s;
 }
 
 /* ==========================
@@ -314,9 +342,10 @@ border-radius:20px;
 
 backdrop-filter:blur(25px);
 
-background:rgba(255,255,255,.05);
-
-border:1px solid rgba(255,255,255,.08);
+/* background:rgba(255,255,255,.05); */
+ background:var(--glass);
+border:1px solid var(--border);
+/* border:1px solid rgba(255,255,255,.08); */
 
 z-index:100;
 
@@ -349,7 +378,7 @@ gap:35px;
 
 nav a{
 
-color:white;
+color:var(--text);
 
 text-decoration:none;
 
@@ -449,6 +478,13 @@ min-height:45px;
 
 }
 
+.hero-text p,
+.about p,
+.content p,
+footer{
+    color:var(--text2);
+}
+
 .desc{
 
 line-height:32px;
@@ -536,7 +572,8 @@ button:active{
 
     border:2px solid #00E5FF;
 
-    color:#fff;
+    /* color:#fff; */
+     color:var(--text);
 
 }
 
@@ -722,9 +759,12 @@ section{
 
 .stats div{
 
-    background:rgba(255,255,255,.04);
+    /* background:rgba(255,255,255,.04);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08); */
+       background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
 
     backdrop-filter:blur(20px);
 
@@ -841,7 +881,9 @@ PROJECT
 
     border-radius:25px;
 
-    background:#111827;
+    /* background:#111827; */
+     background:var(--card);
+    box-shadow:var(--shadow);
 
     transition:.5s;
 
@@ -975,13 +1017,17 @@ input,
 
 textarea{
 
-    background:rgba(255,255,255,.05);
+    /* background:rgba(255,255,255,.05);
 
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1); */
+
+     background:var(--input);
+    color:var(--text);
+    border:1px solid var(--border);
 
     padding:20px;
 
-    color:white;
+    /* color:white; */
 
     border-radius:18px;
 
