@@ -1096,3 +1096,203 @@ font-size:38px;
 }
 
 }
+
+/* ===== CONTACT SECTION ===== */
+#contact {
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+#contact .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    background: linear-gradient(135deg, #6c63ff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+#contact .title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #6c63ff, #a855f7);
+    border-radius: 2px;
+}
+
+.contact-info {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek Glow di belakang */
+.contact-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(108, 99, 255, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.contact-item:hover::before {
+    opacity: 1;
+}
+
+.contact-item:hover {
+    transform: translateX(15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(108, 99, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(108, 99, 255, 0.1);
+}
+
+/* Icon Styling */
+.contact-item .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(168, 85, 247, 0.15));
+    transition: all 0.4s;
+}
+
+.contact-item:hover .icon-wrapper {
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.3), rgba(168, 85, 247, 0.3));
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.contact-item i {
+    font-size: 22px;
+    color: #6c63ff;
+    transition: all 0.4s;
+}
+
+.contact-item:hover i {
+    color: #a855f7;
+    transform: scale(1.1);
+}
+
+/* Text Styling */
+.contact-item .contact-text {
+    flex: 1;
+}
+
+.contact-item .contact-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.contact-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.3s;
+    word-break: break-all;
+}
+
+.contact-item a:hover {
+    color: #a855f7;
+}
+
+/* Arrow indicator */
+.contact-item .arrow {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 18px;
+    transition: all 0.4s;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.contact-item:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: #6c63ff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    #contact .title {
+        font-size: 2rem;
+    }
+    
+    .contact-item {
+        padding: 15px 18px;
+        gap: 15px;
+    }
+    
+    .contact-item .icon-wrapper {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+    }
+    
+    .contact-item i {
+        font-size: 18px;
+    }
+    
+    .contact-item a {
+        font-size: 14px;
+    }
+    
+    .contact-item .contact-label {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-item {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .contact-item .icon-wrapper {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+    
+    .contact-item i {
+        font-size: 16px;
+    }
+    
+    .contact-item a {
+        font-size: 13px;
+    }
+}
