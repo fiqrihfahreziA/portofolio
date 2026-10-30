@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Pengajuan | FixoraV2</title>
+    <link rel="icon" href="../../images/simrs.png" type="image/png">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #0e5a54; --bg-panel: #147a70; --glow: #2bb5a5;
+            --teal: #0f766e; --teal-bright: #14b8a6; --mint: #d9efec;
+            --paper: #f7f7f5; --ink: #0f2a2e;
+            --st-green: #4ade80; --st-amber: #f59e0b; --st-blue: #7dd3fc; --st-violet: #a78bfa;
+            --line: rgba(255,255,255,.16); --line-soft: rgba(255,255,255,.08); --glass: rgba(255,255,255,.05);
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; }
+
+        body {
+            min-height: 100vh; display: flex; flex-direction: column;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            letter-spacing: -0.01em; color: var(--ink); background: var(--bg-panel);
+            position: relative; overflow-x: hidden;
+        }
+
+        /* Background Animasi */
+        .bg-stage { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(120% 90% at 85% -10%, rgba(94,234,212,.38) 0%, transparent 55%), linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-deep) 100%); }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; will-change: transform; }
+        .blob-1 { width: 560px; height: 560px; top: -180px; right: -120px; background: radial-gradient(circle, var(--glow) 0%, transparent 70%); animation: drift-a 22s ease-in-out infinite; }
+        .blob-2 { width: 460px; height: 460px; bottom: -160px; left: -100px; background: radial-gradient(circle, rgba(94,234,212,.40) 0%, transparent 70%); animation: drift-b 28s ease-in-out infinite; }
+        .blob-3 { width: 380px; height: 380px; top: 38%; left: 42%; background: radial-gradient(circle, rgba(167,139,250,.22) 0%, transparent 70%); animation: drift-c 34s ease-in-out infinite; }
+        @keyframes drift-a { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(-90px, 70px) scale(1.12); } 66% { transform: translate(40px, 130px) scale(.94); } }
+        @keyframes drift-b { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(120px,-80px) scale(1.15); } 75% { transform: translate(60px, 40px) scale(.92); } }
+        @keyframes drift-c { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-160px,-60px) scale(1.2); } }
+        .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%); animation: grid-shift 40s linear infinite; }
+        @keyframes grid-shift { to { background-position: 56px 56px, 56px 56px; } }
+
+        /* Navbar */
+        .navbar-glass { position: sticky; top: 0; z-index: 1050; padding: 12px 0; background: rgba(14,90,84,.62) !important; backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--line); flex-shrink: 0; }
+        .navbar-glass .navbar-brand { color: #fff !important; }
+        .brand-icon { width: 44px; height: 44px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+        .brand-icon img { width: 30px; height: 30px; object-fit: contain; }
+        .app-title-main { font-size: 1.05rem; font-weight: 800; color: #fff; line-height: 1.15; }
+        .app-subtitle-main { font-size: .72rem; font-weight: 500; color: rgba(255,255,255,.6); }
+        .navbar-glass .nav-link { display: flex; align-items: center; gap: 8px; padding: 8px 14px !important; border-radius: 10px; font-weight: 600; font-size: .9rem; color: rgba(255,255,255,.72) !important; }
+        .navbar-glass .nav-link:hover { color: #fff !important; background: rgba(255,255,255,.08); }
+        .navbar-glass .nav-link.active { color: #fff !important; background: rgba(255,255,255,.09); box-shadow: inset 0 0 0 1px var(--line); }
+        .navbar-glass .nav-link.active::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--st-green); box-shadow: 0 0 8px var(--st-green); }
+        .user-dropdown-toggle { display: flex; align-items: center; gap: 10px; padding: 5px 12px 5px 5px !important; border-radius: 999px !important; background: var(--glass); box-shadow: inset 0 0 0 1px var(--line); cursor: pointer; }
+        .user-dropdown-toggle::after { display: none; }
+        .user-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; color: #fff; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-bright) 100%); }
+        .user-name-display { color: #fff; font-weight: 600; font-size: .88rem; }
+        .dropdown-glass { min-width: 230px; margin-top: 12px !important; padding: 8px; background: var(--paper) !important; border: 1px solid rgba(15,42,46,.08); border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+        .dropdown-glass .dropdown-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; font-weight: 600; font-size: .9rem; color: var(--ink) !important; }
+        .dropdown-glass .dropdown-item i { color: var(--teal); }
+        .dropdown-glass .dropdown-item:hover { background: var(--mint) !important; }
+        .dropdown-glass .dropdown-item.text-danger { color: #b42318 !important; }
+        .dropdown-glass .dropdown-item.text-danger i { color: #b42318; }
+
+        /* Konten */
+        .content-wrapper { flex: 1 0 auto; width: 100%; padding: 28px 0; }
+        .content-card-glass { position: relative; min-height: 400px; padding: 32px; background: var(--paper); border-radius: 20px; box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 30px 80px rgba(0,0,0,.35); overflow: hidden; }
+        .content-card-glass::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal) 0%, var(--teal-bright) 30%, var(--st-green) 55%, var(--teal-bright) 80%, var(--teal) 100%); background-size: 200% 100%; animation: accent-slide 8s linear infinite; }
+        @keyframes accent-slide { to { background-position: -200% 0; } }
+
+        .step-indicator { display: flex; flex-direction: column; align-items: center; gap: 4px; opacity: .5; transition: .3s; }
+        .step-indicator.active { opacity: 1; }
+        .step-number { width: 32px; height: 32px; border-radius: 50%; background: #e9ecef; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .step-indicator.active .step-number { background: #0d6efd; color: #fff; }
+        .step-line { width: 40px; height: 2px; background: #dee2e6; }
+        .step-indicator.active + .step-line { background: #0d6efd; }
+        .auto-resize { resize: none; overflow: hidden; min-height: 38px; line-height: 1.4; }
+
+        .footer-glass { flex-shrink: 0; margin-top: auto; width: 100%; padding: 18px 0; background: rgba(14,90,84,.55) !important; backdrop-filter: blur(14px); border-top: 1px solid var(--line); color: rgba(255,255,255,.6) !important; font-size: .85rem; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<!-- BACKGROUND ANIMASI -->
+<div class="bg-stage" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="bg-grid"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-3" href="dashboard.html">
+            <div class="brand-icon">
+                <img src="../../images/simrs.png" alt="Logo RSMZ" onerror="this.src='https://via.placeholder.com/30/ffffff/0f766e?text=L'">
+            </div>
+            <div>
+                <div class="app-title-main d-flex align-items-center gap-2">
+                    <span>Aplikasi Permintaan</span>
+                    <i class="bi bi-box-seam" style="color: var(--teal-bright); font-size:.95rem;"></i>
+                </div>
+                <div class="app-subtitle-main d-flex align-items-center gap-2">
+                    <span>dan Perbaikan Barang</span>
+                    <i class="bi bi-tools" style="color: var(--st-amber);"></i>
+                </div>
+            </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPemohon">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarPemohon">
+            <ul class="navbar-nav ms-lg-4 me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html"><i class="bi bi-box"></i> Permintaan Barang</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link user-dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <div class="user-avatar">PE</div>
+                        <span class="user-name-display">Pemohon Test</span>
+                        <i class="bi bi-chevron-down user-caret"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-glass dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i> Profil saya</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="../login.html"><i class="bi bi-box-arrow-right"></i> <span>Keluar</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- KONTEN UTAMA -->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="content-card-glass">
+
+            <!-- Header -->
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <div>
+                            <h4 class="mb-1 fw-bold text-dark">
+                                <i class="bi bi-plus-circle text-primary me-2"></i>Buat Pengajuan Baru
+                            </h4>
+                            <p class="text-muted mb-0">Isi formulir berikut untuk mengajukan permintaan atau perbaikan barang</p>
+                        </div>
+
+                        <div>
+                            <a href="dashboard.html" class="btn btn-outline-secondary rounded-pill px-4" onclick="resetFormStorage()">
+                                <i class="bi bi-arrow-left me-2"></i>Kembali
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+
+                    <!-- Action dikosongkan karena HTML statis -->
+                    <form action="#" method="POST" id="formPengajuan" enctype="multipart/form-data">
+                        
+                        <!-- Step Indicator -->
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="step-indicator active">
+                                    <span class="step-number">1</span>
+                                    <span class="step-label">Identitas</span>
+                                </div>
+                                <div class="step-line"></div>
+                                <div class="step-indicator">
+                                    <span class="step-number">2</span>
+                                    <span class="step-label">Detail Barang</span>
+                                </div>
+                                <div class="step-line"></div>
+                                <div class="step-indicator">
+                                    <span class="step-number">3</span>
+                                    <span class="step-label">Dokumen</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 1 -->
+                        <div class="step-content" id="step1">
+                            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-person-badge me-2"></i>Informasi Pengajuan</h6>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold small">Tanggal Pengajuan <span class="text-danger">*</span></label>
+                                    <input type="date" name="tanggal_pengajuan" class="form-control" value="2026-10-30" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold small">Kategori <span class="text-danger">*</span></label>
+                                    <select name="kategori" id="kategori" class="form-select" required>
+                                        <option value="">Pilih Kategori</option>
+                                        <option value="pemeliharaan">Pemeliharaan</option>
+                                        <option value="pengadaan">Pengadaan</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold small">Jenis</label>
+                                    <select name="barjas" id="barjas" class="form-select" onchange="toggleBarjasLainnya()">
+                                        <option value="">Pilih Jenis</option>
+                                        <option value="barang">Barang</option>
+                                        <option value="jasa">Jasa</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-none" id="wrapper_barjas_lainnya">
+                                    <label class="form-label fw-semibold small">Barjas Lainnya</label>
+                                    <input type="text" name="barajas_lainnya" class="form-control" placeholder="Masukkan barjas lainnya...">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold small">Tahun Anggaran</label>
+                                    <input type="number" name="tahun_anggaran" class="form-control" value="2026" min="2000" max="2027">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small">Dasar Usulan <span class="text-danger">*</span></label>
+                                    <select name="dasar_usulan" id="dasar_usulan" class="form-select" required onchange="toggleDasarUsulanLainnya()">
+                                        <option value="">Pilih Dasar Usulan</option>
+                                        <option value="Program Kerja">Program Kerja</option>
+                                        <option value="Kebutuhan Operasional">Kebutuhan Operasional</option>
+                                        <option value="Penggantian Barang Rusak">Penggantian Barang Rusak</option>
+                                        <option value="Penambahan Kapasitas Pelayanan">Penambahan Kapasitas Pelayanan</option>
+                                        <option value="Pemenuhan Standar Akreditasi">Pemenuhan Standar Akreditasi</option>
+                                        <option value="Keselamatan Pasien">Keselamatan Pasien</option>
+                                        <option value="lainnya">Lainnya...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small">Bidang Usulan <span class="text-danger">*</span></label>
+                                    <select name="bidang_id" class="form-select" required>
+                                        <option value="">-- Pilih Usulan --</option>
+                                        <option value="1">SIMRS</option>
+                                        <option value="2">Keuangan</option>
+                                        <option value="3">Umum</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 d-none" id="wrapper_dasar_usulan_lainnya">
+                                    <label class="form-label fw-semibold small">Dasar Usulan Lainnya <span class="text-danger">*</span></label>
+                                    <input type="text" name="dasar_usulan_lainnya" class="form-control" placeholder="Masukkan dasar usulan lainnya...">
+                                </div>
+
+                                <!-- DATA USER DUMMY -->
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small mb-1">Nama Pengaju <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control bg-light" value="Pemohon Test" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small mb-1">Jabatan <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control bg-light" value="Staf IT" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small mb-1">NIP <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control bg-light" value="1987654321" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small">Instalasi</label>
+                                    <input type="text" name="instalasi" class="form-control bg-light" value="Ruang Server" readonly>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small">Kondisi Barang Lama</label>
+                                    <select name="kondisi_barang_lama" class="form-select">
+                                        <option value="">Pilih Kondisi</option>
+                                        <option value="Rusak berat">Rusak berat</option>
+                                        <option value="Rusak Ringan">Rusak Ringan</option>
+                                        <option value="Tidak Memadai">Tidak Memadai</option>
+                                        <option value="Kapasitas Kurang">Kapasitas Kurang</option>
+                                        <option value="Tidak Tersedia">Tidak Tersedia</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small">Keterangan Barang Lama</label>
+                                    <textarea name="ket_barang_lama" class="form-control" rows="2" placeholder="Jelaskan kondisi barang lama..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- BARIS KEDUA: Alasan Justifikasi, Dampak, & Manfaat -->
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-4">
+                                    <div class="card bg-light border-0 p-3 h-100">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-clipboard-check text-success me-2"></i>Alasan Justifikasi <span class="text-danger">*</span></label>
+                                        <textarea name="alasan_justifikasi" class="form-control" rows="4" placeholder="Jelaskan alasan dan justifikasi..." required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-light border-0 p-3 h-100">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Dampak Jika Tidak Dilaksanakan <span class="text-danger">*</span></label>
+                                        <textarea name="dampak" class="form-control" rows="4" placeholder="Jelaskan dampak yang akan terjadi..." required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-light border-0 p-3 h-100">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-star-fill text-primary me-2"></i>Manfaat yang Diharapkan <span class="text-danger">*</span></label>
+                                        <textarea name="manfaat" class="form-control" rows="4" placeholder="Jelaskan manfaat yang akan diperoleh..." required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div class="step-content d-none" id="step2">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold text-primary mb-0"><i class="bi bi-list-check me-2"></i>Daftar Barang</h6>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="tambahItem()"><i class="bi bi-plus-circle me-1"></i>Tambah Item</button>
+                            </div>
+
+                            <div id="itemsContainer">
+                                <!-- Item pertama (di-generate oleh JS saat load) -->
+                            </div>
+
+                            <!-- Ringkasan Total -->
+                            <div class="bg-light p-3 rounded-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-semibold">Total Item:</span>
+                                            <span id="totalItem">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-semibold">Grand Total (Rp):</span>
+                                            <span id="grandTotal" class="fw-bold text-primary">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="step-content d-none" id="step3">
+                            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-paperclip me-2"></i>Dokumen Pendukung</h6>
+                            <p class="text-muted small mb-3"><i class="bi bi-info-circle me-1"></i>Centang dokumen yang ingin diupload. <strong>Semua opsional.</strong></p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_analisis_kebutuhan" id="ada_analisis_kebutuhan" value="1" onchange="toggleDokumenPendukung(this, 'analisis_kebutuhan')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_analisis_kebutuhan"><i class="bi bi-clipboard-data me-1"></i>Analisis Kebutuhan</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_analisis_kebutuhan">
+                                            <input type="file" name="analisis_kebutuhan" class="form-control" accept=".pdf,.doc,.docx,.xlsx,.xls" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_spesifikasi_teknis" id="ada_spesifikasi_teknis" value="1" onchange="toggleDokumenPendukung(this, 'spesifikasi_teknis')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_spesifikasi_teknis"><i class="bi bi-gear me-1"></i>Spesifikasi Teknis</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_spesifikasi_teknis">
+                                            <input type="file" name="spesifikasi_teknis" class="form-control" accept=".pdf,.doc,.docx,.xlsx,.xls" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_foto_barang" id="ada_foto_barang" value="1" onchange="toggleDokumenPendukung(this, 'foto_barang')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_foto_barang"><i class="bi bi-image me-1"></i>Foto Barang</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_foto_barang">
+                                            <input type="file" name="foto_barang[]" class="form-control" accept="image/*" multiple disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_penawaran_harga" id="ada_penawaran_harga" value="1" onchange="toggleDokumenPendukung(this, 'penawaran_harga')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_penawaran_harga"><i class="bi bi-cash-coin me-1"></i>Penawaran Harga</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_penawaran_harga">
+                                            <input type="file" name="penawaran_harga" class="form-control" accept=".pdf,.xlsx,.xls,.doc,.docx" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_data_pengguna" id="ada_data_penggunaan" value="1" onchange="toggleDokumenPendukung(this, 'data_penggunaan')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_data_pengguna"><i class="bi bi-graph-up me-1"></i>Data Penggunaan / Pemakaian</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_data_penggunaan">
+                                            <input type="file" name="data_pengguna" class="form-control" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card p-3 border-0 bg-light h-100">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="ada_dokumen_lainnya" id="ada_dokumen_lainnya" value="1" onchange="toggleDokumenPendukung(this, 'dokumen_lainnya')">
+                                            <label class="form-check-label fw-semibold text-primary" for="ada_dokumen_lainnya"><i class="bi bi-folder-plus me-1"></i>Dokumen Pendukung Lainnya</label>
+                                        </div>
+                                        <div class="mt-2 d-none" id="detail_dokumen_lainnya">
+                                            <input type="file" name="dokumen_pendukung_lainnya" class="form-control" accept=".pdf,.doc,.docx,.xlsx,.xls,.jpg,.jpeg,.png" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="mt-4 pt-3 border-top">
+                            <div class="d-flex justify-content-between">
+                                <a href="dashboard.html" class="btn btn-outline-secondary rounded-pill px-4" onclick="resetFormStorage()">Batal</a>
+
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-primary rounded-pill px-4" id="btnPrevStep" onclick="keStepSebelumnya()" style="display:none;">Sebelumnya</button>
+                                    <button type="button" class="btn btn-primary rounded-pill px-4" id="btnNextStep" onclick="keStepBerikutnya()">Selanjutnya</button>
+                                    <button type="button" class="btn btn-success rounded-pill px-4" id="submitBtn" onclick="kirimPengajuan()" style="display:none;">Kirim Pengajuan</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer-glass mt-auto">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
+                <img src="../../images/simrs.png" alt="RSMZ" style="height: 22px; width: 22px; object-fit: contain;" onerror="this.style.display='none'">
+                <span>© SIMRS RSMZ 2026</span>
+            </div>
+            <span>FixoraV2</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SCRIPT LOGIKA FORM -->
+<script>
+let indeksItem = 0;
+let stepSekarang = 1;
+
+function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = (el.scrollHeight + 2) + 'px';
+}
+
+function pasangAutoResize(container) {
+    const area = container || document;
+    area.querySelectorAll('textarea.auto-resize').forEach(t => {
+        autoResize(t);
+        t.addEventListener('input', function () { autoResize(this); });
+    });
+}
+
+function buatHTMLItemRow(index) {
+    return `
+        <div class="row g-3 align-items-start">
+            <div class="col-md-3">
+                <label class="form-label fw-semibold small">Nama Barang <span class="text-danger">*</span></label>
+                <input type="text" name="items[${index}][nama_barang]" class="form-control item-required" placeholder="Nama barang" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold small">Spesifikasi</label>
+                <textarea name="items[${index}][spesifikasi]" class="form-control auto-resize" rows="1" placeholder="Spesifikasi lengkap (bisa panjang)" oninput="autoResize(this)"></textarea>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-semibold small">Satuan</label>
+                <select name="items[${index}][satuan]" class="form-select">
+                    <option value="Unit">Unit</option>
+                    <option value="Buah">Buah</option>
+                    <option value="Pcs">Pcs</option>
+                    <option value="Box">Box</option>
+                    <option value="Paket">Paket</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label fw-semibold small">Jumlah <span class="text-danger">*</span></label>
+                <input type="number" name="items[${index}][jumlah]" class="form-control item-required hitung-total" placeholder="0" min="1" required oninput="hitungTotalItem(this)">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-semibold small">Harga Satuan <span class="text-danger">*</span></label>
+                <input type="number" name="items[${index}][harga_satuan]" class="form-control item-required hitung-total" placeholder="0" min="0" required oninput="hitungTotalItem(this)">
+            </div>
+            <div class="col-md-1">
+                <label class="form-label fw-semibold small">Total</label>
+                <input type="text" name="items[${index}][total]" class="form-control bg-light total-harga" value="0" readonly>
+            </div>
+            <div class="col-md-1">
+                <label class="form-label fw-semibold small">&nbsp;</label>
+                <button type="button" class="btn btn-sm btn-outline-danger w-100" onclick="hapusItem(this)"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-md-6">
+                <label class="form-label fw-semibold small">Kepemilikan Barang <span class="text-danger">*</span></label>
+                <input type="text" name="items[${index}][kepemilikan]" class="form-control item-required" placeholder="Contoh: milik ira, milik sendiri..." required>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="items[${index}][ada_barang_tersedia]" id="barang_tersedia_${index}" value="1" onchange="toggleBarangTersedia(this, ${index})">
+                    <label class="form-check-label fw-semibold text-success" for="barang_tersedia_${index}"><i class="bi bi-box-seam me-1"></i>Ada Barang Tersedia</label>
+                </div>
+            </div>
+            <div class="col-12" id="detail_barang_tersedia_${index}" style="display: none;">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold small">Nama Barang Tersedia</label>
+                        <input type="text" name="items[${index}][barang_tersedia][nama_barang]" class="form-control" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-semibold small">Jumlah</label>
+                        <input type="number" name="items[${index}][barang_tersedia][jumlah]" class="form-control" disabled>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold small">Tahun Perolehan</label>
+                        <input type="number" name="items[${index}][barang_tersedia][tahun_perolehan]" class="form-control" disabled>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold small">Kondisi</label>
+                        <select name="items[${index}][barang_tersedia][kondisi]" class="form-select" disabled>
+                            <option value="">Pilih</option>
+                            <option value="Baik">Baik</option>
+                            <option value="Rusak Ringan">Rusak Ringan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-3 pt-3 border-top">
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="items[${index}][ada_dokumen]" id="ada_dokumen_${index}" value="1" onchange="toggleDokumenItem(this, ${index})">
+                    <label class="form-check-label fw-semibold text-primary" for="ada_dokumen_${index}"><i class="bi bi-paperclip me-1"></i>Upload Dokumen</label>
+                </div>
+            </div>
+            <div class="col-12" id="detail_dokumen_${index}" style="display: none;">
+                <input type="file" name="items[${index}][dokumen_upload]" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.xlsx,.xls" disabled>
+            </div>
+        </div>
+    `;
+}
+
+function tambahItem() {
+    const container = document.getElementById('itemsContainer');
+    const itemRow = document.createElement('div');
+    itemRow.className = 'item-row card p-3 mb-3 bg-light';
+    itemRow.innerHTML = buatHTMLItemRow(indeksItem);
+    container.appendChild(itemRow);
+    pasangAutoResize(itemRow);
+    indeksItem++;
+    perbaruiTotalItem();
+    simpanDataForm();
+}
+
+function tambahItemTanpaSimpan() {
+    const container = document.getElementById('itemsContainer');
+    const itemRow = document.createElement('div');
+    itemRow.className = 'item-row card p-3 mb-3 bg-light';
+    itemRow.innerHTML = buatHTMLItemRow(indeksItem);
+    container.appendChild(itemRow);
+    pasangAutoResize(itemRow);
+    indeksItem++;
+}
+
+function toggleBarangTersedia(checkbox, index) {
+    const detailDiv = document.getElementById('detail_barang_tersedia_' + index);
+    const inputs = detailDiv.querySelectorAll('input, select');
+    if (checkbox.checked) {
+        detailDiv.style.display = 'block';
+        inputs.forEach(input => input.disabled = false);
+    } else {
+        detailDiv.style.display = 'none';
+        inputs.forEach(input => { input.disabled = true; input.value = ''; });
+    }
+    simpanDataForm();
+}
+
+function toggleDokumenItem(checkbox, index) {
+    const detailDiv = document.getElementById('detail_dokumen_' + index);
+    if (!detailDiv) return;
+    const inputs = detailDiv.querySelectorAll('input');
+    if (checkbox.checked) {
+        detailDiv.style.display = 'block';
+        inputs.forEach(input => input.disabled = false);
+    } else {
+        detailDiv.style.display = 'none';
+        inputs.forEach(input => { input.disabled = true; input.value = ''; });
+    }
+    simpanDataForm();
+}
+
+function toggleDokumenPendukung(checkbox, fieldName) {
+    const detailDiv = document.getElementById('detail_' + fieldName);
+    if (!detailDiv) return;
+    const inputs = detailDiv.querySelectorAll('input');
+    if (checkbox.checked) {
+        detailDiv.classList.remove('d-none');
+        detailDiv.style.display = 'block';
+        inputs.forEach(input => input.disabled = false);
+    } else {
+        detailDiv.classList.add('d-none');
+        detailDiv.style.display = 'none';
+        inputs.forEach(input => { input.disabled = true; input.value = ''; });
+    }
+    simpanDataForm();
+}
+
+function hitungTotalItem(element) {
+    const row = element.closest('.item-row');
+    const jumlahInput = row.querySelector('input[name*="[jumlah]"]');
+    const hargaInput = row.querySelector('input[name*="[harga_satuan]"]');
+    const totalInput = row.querySelector('input[name*="[total]"]');
+    const jumlah = parseInt(jumlahInput.value) || 0;
+    const harga = parseInt(hargaInput.value) || 0;
+    const total = jumlah * harga;
+    totalInput.value = formatRupiah(total);
+    hitungGrandTotal();
+}
+
+function formatRupiah(angka) {
+    return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function hitungGrandTotal() {
+    const totalInputs = document.querySelectorAll('.total-harga');
+    let grandTotal = 0;
+    totalInputs.forEach(input => {
+        const value = input.value.replace(/\./g, '');
+        grandTotal += parseInt(value) || 0;
+    });
+    document.getElementById('grandTotal').textContent = formatRupiah(grandTotal);
+}
+
+function hapusItem(button) {
+    const rows = document.querySelectorAll('.item-row');
+    if (rows.length > 1) {
+        button.closest('.item-row').remove();
+        perbaruiTotalItem();
+        hitungGrandTotal();
+        simpanDataForm();
+    } else {
+        alert('Minimal 1 item harus diisi!');
+    }
+}
+
+function perbaruiTotalItem() {
+    const totalItem = document.querySelectorAll('.item-row').length;
+    document.getElementById('totalItem').textContent = totalItem;
+    hitungGrandTotal();
+}
+
+function validasiStepSekarang() {
+    const step = document.getElementById('step' + stepSekarang);
+    const requiredFields = step.querySelectorAll('[required]');
+    for (const field of requiredFields) {
+        if (field.disabled) continue;
+        if (!field.value) {
+            field.reportValidity();
+            field.focus();
+            return false;
+        }
+    }
+    return true;
+}
+
+function keStepBerikutnya() {
+    if (!validasiStepSekarang()) return;
+    if (stepSekarang < 3) {
+        stepSekarang++;
+        perbaruiUI();
+        simpanDataForm();
+    }
+}
+
+function keStepSebelumnya() {
+    if (stepSekarang > 1) {
+        stepSekarang--;
+        perbaruiUI();
+        simpanDataForm();
+    }
+}
+
+function perbaruiUI() {
+    sessionStorage.setItem('stepPengajuan', stepSekarang);
+    for (let i = 1; i <= 3; i++) {
+        const step = document.getElementById('step' + i);
+        if (i === stepSekarang) {
+            step.classList.remove('d-none');
+            step.style.display = 'block';
+            step.querySelectorAll('input:not([readonly]), select, textarea, button').forEach(el => {
+                if (el.tagName === 'BUTTON' && el.closest('.item-row')) {
+                    const rows = document.querySelectorAll('.item-row');
+                    el.disabled = rows.length <= 1;
+                } else if (el.tagName !== 'BUTTON') {
+                    el.disabled = false;
+                } else if (el.id === 'btnPrevStep' || el.id === 'btnNextStep' || el.id === 'submitBtn') {
+                    // skip
+                } else {
+                    el.disabled = false;
+                }
+            });
+        } else {
+            step.classList.add('d-none');
+            step.style.display = 'none';
+            step.querySelectorAll('input, select, textarea, button').forEach(el => {
+                if (el.id === 'btnPrevStep' || el.id === 'btnNextStep' || el.id === 'submitBtn') return;
+                if (el.hasAttribute('readonly')) return;
+                el.disabled = true;
+            });
+        }
+    }
+
+    document.querySelectorAll('.step-indicator').forEach((el, index) => {
+        el.classList.toggle('active', index + 1 === stepSekarang);
+    });
+
+    const btnPrev = document.getElementById('btnPrevStep');
+    const btnNext = document.getElementById('btnNextStep');
+    const btnSubmit = document.getElementById('submitBtn');
+
+    if (stepSekarang === 1) {
+        btnPrev.style.display = 'none';
+        btnNext.style.display = 'inline-block';
+        btnSubmit.style.display = 'none';
+    } else if (stepSekarang === 2) {
+        btnPrev.style.display = 'inline-block';
+        btnNext.style.display = 'inline-block';
+        btnSubmit.style.display = 'none';
+    } else if (stepSekarang === 3) {
+        btnPrev.style.display = 'inline-block';
+        btnNext.style.display = 'none';
+        btnSubmit.style.display = 'inline-block';
+    }
+}
+
+function simpanDataForm() {
+    const form = document.getElementById('formPengajuan');
+    if (!form) return;
+    const data = {};
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+        if (!el.name) return;
+        if (el.type === 'file') return;
+        if (el.type === 'hidden' && el.name === '_token') return;
+        if (el.type === 'checkbox') {
+            data[el.name] = el.checked;
+        } else if (el.type === 'radio') {
+            if (el.checked) data[el.name] = el.value;
+        } else {
+            data[el.name] = el.value;
+        }
+    });
+    data['__indeksItem'] = indeksItem;
+    data['__stepSekarang'] = stepSekarang;
+    data['__jumlahItemRow'] = document.querySelectorAll('.item-row').length;
+    sessionStorage.setItem('dataPengajuan', JSON.stringify(data));
+}
+
+function restoreDataForm() {
+    const saved = sessionStorage.getItem('dataPengajuan');
+    if (!saved) {
+        tambahItemTanpaSimpan();
+        pasangAutoResize();
+        return;
+    }
+    let data;
+    try { data = JSON.parse(saved); } catch (e) { tambahItemTanpaSimpan(); return; }
+
+    if (data['__stepSekarang']) stepSekarang = parseInt(data['__stepSekarang']);
+
+    const jumlahRow = parseInt(data['__jumlahItemRow']) || 1;
+    while (document.querySelectorAll('.item-row').length < jumlahRow) {
+        tambahItemTanpaSimpan();
+    }
+    if (data['__indeksItem']) indeksItem = parseInt(data['__indeksItem']);
+
+    const form = document.getElementById('formPengajuan');
+    Object.keys(data).forEach(name => {
+        if (name.startsWith('__')) return;
+        const els = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
+        if (!els.length) return;
+        els.forEach(el => {
+            if (el.type === 'file') return;
+            if (el.type === 'checkbox') {
+                el.checked = !!data[name];
+                const match = el.name.match(/items\[(\d+)\]/);
+                if (match) {
+                    const idx = match[1];
+                    if (el.name.includes('[ada_barang_tersedia]') && el.checked) toggleBarangTersedia(el, idx);
+                    if (el.name.includes('[ada_dokumen]') && el.checked) toggleDokumenItem(el, idx);
+                }
+                if (el.name.startsWith('ada_') && el.checked && !el.name.includes('items[')) {
+                    const fieldName = el.name.replace('ada_', '');
+                    toggleDokumenPendukung(el, fieldName);
+                }
+            } else if (el.type === 'radio') {
+                el.checked = el.value === data[name];
+            } else {
+                el.value = data[name];
+                if (el.classList.contains('auto-resize')) autoResize(el);
+            }
+        });
+    });
+
+    const barjas = document.getElementById('barjas');
+    if (barjas && barjas.value === 'lainnya') {
+        document.getElementById('wrapper_barjas_lainnya').classList.remove('d-none');
+        document.getElementById('wrapper_barjas_lainnya').querySelector('input').setAttribute('required', 'required');
+    }
+    const dasarUsulan = document.getElementById('dasar_usulan');
+    if (dasarUsulan && dasarUsulan.value === 'lainnya') {
+        document.getElementById('wrapper_dasar_usulan_lainnya').classList.remove('d-none');
+        document.getElementById('wrapper_dasar_usulan_lainnya').querySelector('input').setAttribute('required', 'required');
+    }
+
+    document.querySelectorAll('.item-row').forEach(row => {
+        const jumlahInput = row.querySelector('input[name*="[jumlah]"]');
+        if (jumlahInput && jumlahInput.value) hitungTotalItem(jumlahInput);
+    });
+    pasangAutoResize();
+    perbaruiTotalItem();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('fresh') === '1') {
+        sessionStorage.removeItem('stepPengajuan');
+        sessionStorage.removeItem('dataPengajuan');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    const savedStep = sessionStorage.getItem('stepPengajuan');
+    stepSekarang = savedStep ? parseInt(savedStep) : 1;
+
+    restoreDataForm();
+    perbaruiUI();
+    perbaruiTotalItem();
+
+    const deleteButtons = document.querySelectorAll('.item-row .btn-outline-danger');
+    if (deleteButtons.length <= 1) deleteButtons.forEach(btn => btn.disabled = true);
+
+    const form = document.getElementById('formPengajuan');
+    form.addEventListener('input', simpanDataForm);
+    form.addEventListener('change', simpanDataForm);
+});
+
+function kirimPengajuan() {
+    if (!validasiStepSekarang()) return;
+    
+    // Simulasi loading
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...';
+    
+    // Jeda 1.5 detik lalu redirect kembali ke dashboard
+    setTimeout(() => {
+        alert('Pengajuan Berhasil Dikirim! (Simulasi)');
+        resetFormStorage();
+        window.location.href = 'dashboard.html';
+    }, 1500);
+}
+
+function toggleBarjasLainnya() {
+    const val = document.getElementById('barjas').value;
+    const wrapper = document.getElementById('wrapper_barjas_lainnya');
+    const input = wrapper.querySelector('input[name="barajas_lainnya"]');
+    if (val === 'lainnya') {
+        wrapper.classList.remove('d-none');
+        input.setAttribute('required', 'required');
+    } else {
+        wrapper.classList.add('d-none');
+        input.removeAttribute('required');
+        input.value = '';
+    }
+    simpanDataForm();
+}
+
+function toggleDasarUsulanLainnya() {
+    const val = document.getElementById('dasar_usulan').value;
+    const wrapper = document.getElementById('wrapper_dasar_usulan_lainnya');
+    const input = wrapper.querySelector('input[name="dasar_usulan_lainnya"]');
+    if (val === 'lainnya') {
+        wrapper.classList.remove('d-none');
+        input.setAttribute('required', 'required');
+    } else {
+        wrapper.classList.add('d-none');
+        input.removeAttribute('required');
+        input.value = '';
+    }
+    simpanDataForm();
+}
+
+function resetFormStorage() {
+    sessionStorage.removeItem('stepPengajuan');
+    sessionStorage.removeItem('dataPengajuan');
+}
+</script>
+</body>
+</html>
