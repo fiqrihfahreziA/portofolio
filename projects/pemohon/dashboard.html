@@ -81,6 +81,8 @@
         .bg-info-subtle { background-color: #d1ecf1 !important; }
         .bg-purple-subtle { background-color: #e7d8f5 !important; }
         .text-purple { color: #6f42c1 !important; }
+        .bg-teal-subtle { background-color: #d2f4ea !important; }
+        .text-teal { color: #20c997 !important; }
 
         .hover-shadow { transition: all 0.3s ease; }
         .hover-shadow:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }
@@ -144,7 +146,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-glass">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+        <a class="navbar-brand d-flex align-items-center gap-3" href="dashboard.html">
             <div class="brand-icon">
                 <img src="../../images/simrs.png" alt="Logo RSMZ" onerror="this.src='https://via.placeholder.com/30/ffffff/0f766e?text=L'">
             </div>
@@ -167,7 +169,7 @@
         <div class="collapse navbar-collapse" id="navbarPemohon">
             <ul class="navbar-nav ms-lg-4 me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="bi bi-box"></i> Permintaan Barang</a>
+                    <a class="nav-link active" href="dashboard.html"><i class="bi bi-box"></i> Permintaan Barang</a>
                 </li>
             </ul>
 
@@ -203,7 +205,7 @@
                             <p class="text-muted mb-0">Kelola permintaan dan perbaikan barang Anda</p>
                         </div>
                         <div>
-                            <a href="create.html?fresh=1" class="btn btn-primary rounded-pill px-4"><i class="bi bi-plus-circle me-2"></i>Buat Pengajuan Baru</a>
+                            <a href="buat_pengajuan.html?fresh=1" class="btn btn-primary rounded-pill px-4"><i class="bi bi-plus-circle me-2"></i>Buat Pengajuan Baru</a>
                         </div>
                     </div>
                 </div>
@@ -364,7 +366,7 @@
                     <div class="col-md-6"><div class="info-tile"><span class="info-tile-label"><i class="bi bi-person me-1"></i>Pemohon</span><span class="info-tile-value" id="modal-pemohon">-</span></div></div>
                 </div>
 
-                <!-- BAGIAN PROGRESS TRACKER (YANG TADI HILANG) -->
+                <!-- BAGIAN PROGRESS TRACKER -->
                 <div class="mb-4" id="tracker-container">
                     <h6 class="fw-semibold small text-muted mb-3"><i class="bi bi-signpost-split me-1"></i>Progres Persetujuan</h6>
                     <div class="status-tracker" id="modal-tracker">
@@ -509,17 +511,15 @@
         renderTable(currentPage);
     }
 
-    // 6. Fungsi Buka Modal Detail Dinamis (Termasuk Logic Tracker)
+    // 6. Fungsi Buka Modal Detail Dinamis
     function bukaModal(index) {
         const data = dataPengajuan[index];
         
-        // Set Header Modal
         document.getElementById('modal-no-pengajuan').innerText = data.no;
         
         const badge = document.getElementById('modal-status-badge');
         badge.innerText = data.status;
         
-        // Set warna badge & icon modal
         let bgClass = 'bg-success'; 
         let badgeStyle = 'bg-success-subtle text-success';
         if (data.status === 'Proses') { bgClass = 'bg-info'; badgeStyle = 'bg-info-subtle text-info'; }
@@ -531,7 +531,6 @@
         badge.className = `badge px-3 py-2 rounded-pill ${badgeStyle}`;
         badge.innerHTML = `<i class="bi bi-circle-fill me-1" style="font-size: 6px;"></i>${data.status}`;
 
-        // Set Body Modal
         document.getElementById('modal-tanggal').innerText = data.tgl;
         document.getElementById('modal-bidang').innerText = data.bidang;
         document.getElementById('modal-kategori').innerText = data.no.includes('001') || data.no.includes('008') ? 'Pengadaan' : 'Pemeliharaan';
@@ -542,24 +541,21 @@
         const trackerContainer = document.getElementById('tracker-container');
         const trackerHtml = document.getElementById('modal-tracker');
         
-        // Jika status Ditolak/Draft, sembunyikan tracker atau tampilkan pesan khusus
         if (data.status === 'Ditolak' || data.status === 'Draft') {
             trackerContainer.style.display = 'none';
         } else {
             trackerContainer.style.display = 'block';
             trackerHtml.innerHTML = '';
             
-            // Tentukan sampai tahap mana tracker menyala
-            let stepAktif = 0; // Default: Diajukan
-            if (data.status === 'Disetujui') stepAktif = 4; // Selesai
-            else if (data.status === 'Proses') stepAktif = 2; // Kabid
-            else if (data.status === 'Revisi') stepAktif = 1; // Koordinator
+            let stepAktif = 0;
+            if (data.status === 'Disetujui') stepAktif = 4;
+            else if (data.status === 'Proses') stepAktif = 2;
+            else if (data.status === 'Revisi') stepAktif = 1;
 
             const steps = ['Diajukan', 'Koordinator', 'Kabid', 'Keuangan', 'Selesai'];
             
             steps.forEach((label, i) => {
                 const isActive = i <= stepAktif ? 'active' : '';
-                // Kasih tanggal dummy hanya untuk yang aktif
                 const tglDummy = isActive ? `<span class="tracker-date">${data.tgl.substring(0,5)}/26</span>` : '';
                 
                 trackerHtml.innerHTML += `
@@ -571,7 +567,6 @@
                 `;
             });
         }
-        // ----------------------------
 
         // Render List Barang di Modal
         const barangList = document.getElementById('modal-barang-list');

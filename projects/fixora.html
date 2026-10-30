@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk - FixoraV2</title>
     <!-- Menggunakan gambar placeholder karena gambar asli ada di Laravel -->
-    <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
+    <link rel="icon" href="../../images/simrs.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -103,7 +103,6 @@
         .brand, .brand-copy, .brand-foot { position: relative; z-index: 1; }
 
         .brand { display: flex; align-items: center; gap: 12px; }
-        /* Menggunakan logo placeholder karena gambar asli pakai asset Laravel */
         .brand img { width: 44px; height: 44px; object-fit: contain; background: #fff; border-radius: 12px; padding: 5px; box-shadow: 0 8px 22px rgba(0,0,0,.18); }
         .brand span { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
 
@@ -224,8 +223,7 @@
         </div>
 
         <div class="brand">
-            <!-- Logo diganti placeholder karena asset Laravel tidak terbaca di HTML statis -->
-            <img src="../images/simrs.png" alt="Logo">
+            <img src="../../images/simrs.png" alt="Logo" onerror="this.src='https://via.placeholder.com/44/ffffff/0f766e?text=L'">
             <span>FixoraV2</span>
         </div>
 
@@ -259,7 +257,7 @@
 
         <div class="brand-foot">
             <div class="foot-id">
-                <img src="../images/simrs.png" alt="Logo">
+                <img src="../../images/simrs.png" alt="Logo" onerror="this.src='https://via.placeholder.com/36/ffffff/0f766e?text=L'">
                 <div>
                     <strong>SIMRS RSMZ</strong>
                     <small>Sistem Informasi Manajemen Rumah Sakit</small>
@@ -276,15 +274,15 @@
     <main class="form-panel">
         <div class="form-wrap">
             <div class="mobile-brand">
-                <img src="../images/simrs.png" alt="Logo RSMZ">
+                <img src="../../images/simrs.png" alt="Logo RSMZ" onerror="this.src='https://via.placeholder.com/38/ffffff/0f766e?text=L'">
                 <span>FixoraV2</span>
             </div>
 
             <h1>Masuk ke akun Anda</h1>
             <p class="lead">Aplikasi Pengadaan dan Pemeliharaan Barang RSMZ.</p>
 
-            <!-- Action dikosongkan karena ini HTML statis, tidak ada backend PHP -->
-            <form method="POST" action="pemohon/dashboard.html" id="loginForm">
+            <!-- Form Action dikosongkan karena ini HTML statis -->
+            <form action="#" id="loginForm">
                 <div class="field">
                     <label for="email">Email</label>
                     <div class="control">
@@ -319,10 +317,17 @@
             </form>
 
             <p class="help">Lupa password atau belum punya akun? Hubungi tim IT RSMZ.</p>
+
+            <!-- Kotak Info Demo (Opsional) -->
+            <div class="mt-4 p-3 bg-light rounded-3 text-center" style="font-size: 13px; border: 1px dashed #ccc;">
+                <strong>🔑 Akun Demo:</strong><br>
+                <span class="text-muted">Pemohon:</span> <code>pemohon@test.com</code> / <code>test</code><br>
+                <span class="text-muted">Penerima:</span> <code>penerima@test.com</code> / <code>test</code>
+            </div>
         </div>
 
         <div class="form-foot">
-            <img src="../images/simrs.png" alt="">
+            <img src="../../images/simrs.png" alt="" onerror="this.style.display='none'">
             <span><b>SIMRS RSMZ</b> © 2026</span>
         </div>
     </main>
@@ -381,36 +386,6 @@
         }, 1000); // Jeda 1 detik
     });
 </script>
-
-<!-- <script>
-    // Tampilkan / sembunyikan password
-    const passInput = document.getElementById('password');
-    const toggleBtn = document.getElementById('toggleBtn');
-
-    toggleBtn.addEventListener('click', function () {
-        const show = passInput.type === 'password';
-        passInput.type = show ? 'text' : 'password';
-        toggleBtn.classList.toggle('on', show);
-        toggleBtn.setAttribute('aria-label', show ? 'Sembunyikan password' : 'Tampilkan password');
-    });
-
-    // Status loading saat submit (hanya simulasi visual)
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Mencegah reload halaman karena tidak ada backend
-        const btn = document.getElementById('loginBtn');
-        btn.classList.add('loading');
-        btn.disabled = true;
-        document.getElementById('btnText').textContent = 'Memproses...';
-        
-        // Simulasi selesai setelah 2 detik
-        setTimeout(() => {
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            document.getElementById('btnText').textContent = 'Masuk';
-            alert('Ini adalah tampilan statis. Tombol login tidak berfungsi karena tidak ada backend.');
-        }, 2000);
-    });
-</script> -->
 
 </body>
 </html>
