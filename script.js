@@ -1,43 +1,151 @@
-// Efek mengetik (tanpa library)
-(function () {
-  var el = document.getElementById("typing");
-  if (!el) return;
-  var words = ["Full Stack Developer", "Laravel Developer", "Web Developer"];
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) { el.textContent = words[0]; return; }
+// =======================================
+// LOADING SCREEN
+// =======================================
 
-  var w = 0, i = 0, deleting = false;
-  function tick() {
-    var word = words[w];
-    el.textContent = word.slice(0, i);
-    var delay = deleting ? 45 : 85;
-    if (!deleting && i === word.length) { deleting = true; delay = 1600; }
-    else if (deleting && i === 0) { deleting = false; w = (w + 1) % words.length; delay = 350; }
-    i += deleting ? -1 : 1;
-    setTimeout(tick, delay);
-  }
-  tick();
-})();
+window.addEventListener("load", () => {
 
-// Tandai menu yang sedang aktif saat scroll
-(function () {
-  var links = document.querySelectorAll(".nav nav a[href^='#']");
-  var map = {};
-  links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting && map[e.target.id]) {
-        links.forEach(function (a) { a.classList.remove("active"); });
-        map[e.target.id].classList.add("active");
-      }
+    const loader = document.querySelector(".loader");
+
+    gsap.to(loader, {
+        opacity: 0,
+        duration: 1,
+        delay: 1,
+        onComplete: () => {
+            loader.style.display = "none";
+        }
     });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  Object.keys(map).forEach(function (id) {
-    var section = document.getElementById(id);
-    if (section) observer.observe(section);
-  });
-})();
 
-// Tahun otomatis di footer
-var yearEl = document.getElementById("year");
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
+
+// =======================================
+// TYPING EFFECT
+// =======================================
+
+new Typed(".typing",{
+
+    strings:[
+        "Full Stack Developer",
+        "Frontend Developer",
+        "Backend Developer",
+        "UI Engineer",
+        "Laravel Developer",
+        "React Developer"
+    ],
+
+    typeSpeed:70,
+    backSpeed:40,
+    backDelay:1500,
+    loop:true
+
+});
+
+// =======================================
+// CUSTOM CURSOR
+// =======================================
+
+const cursor = document.querySelector(".cursor");
+const cursor2 = document.querySelector(".cursor2");
+
+window.addEventListener("mousemove",(e)=>{
+
+    cursor.style.left=e.clientX+"px";
+    cursor.style.top=e.clientY+"px";
+
+    cursor2.style.left=e.clientX+"px";
+    cursor2.style.top=e.clientY+"px";
+
+});
+
+// =======================================
+// CURSOR HOVER EFFECT
+// =======================================
+
+document.querySelectorAll("a,button,.card").forEach(item=>{
+
+    item.addEventListener("mouseenter",()=>{
+
+        gsap.to(cursor,{
+            scale:2,
+            duration:.2
+        });
+
+        gsap.to(cursor2,{
+            scale:1.5,
+            duration:.2
+        });
+
+    });
+
+    item.addEventListener("mouseleave",()=>{
+
+        gsap.to(cursor,{
+            scale:1
+        });
+
+        gsap.to(cursor2,{
+            scale:1
+        });
+
+    });
+
+});
+
+// =======================================
+// HERO ANIMATION
+// =======================================
+
+gsap.from(".hero-text p",{
+
+    opacity:0,
+
+    y:60,
+
+    duration:1
+
+});
+
+gsap.from(".hero-text h1",{
+
+    opacity:0,
+
+    y:80,
+
+    duration:1,
+
+    delay:.2
+
+});
+
+gsap.from(".hero-text h2",{
+
+    opacity:0,
+
+    y:60,
+
+    duration:1,
+
+    delay:.4
+
+});
+
+gsap.from(".buttons",{
+
+    opacity:0,
+
+    y:60,
+
+    duration:1,
+
+    delay:.6
+
+});
+
+gsap.from(".hero-image",{
+
+    opacity:0,
+
+    x:150,
+
+    duration:1.2
+
+});
