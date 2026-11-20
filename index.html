@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>addEventListener("error",function(){document.querySelectorAll(".rv.pre").forEach(function(e){e.classList.add("in")})})</script>
 <style>
 :root{
   --bg:#F6F2ED; --surface:#FFFFFF; --ink:#2A1C14; --muted:#76655A; --line:#E6DCD1;
@@ -79,8 +80,9 @@ nav a:hover,nav a.on{background:var(--mint);color:var(--teal-d)}
 @keyframes grow{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none}
+.rv{transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.pre{opacity:0;transform:translateY(28px)}
+.rv.pre.in{opacity:1;transform:none}
 
 /* about */
 .about{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
@@ -183,7 +185,7 @@ footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.9rem}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .rv{opacity:1;transform:none}
+  .rv.pre{opacity:1;transform:none}
   .hero h1 .ln span{transform:none}
   .ecg path{stroke-dashoffset:0}
 }
@@ -264,12 +266,12 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
     <p class="sum">Lulusan Teknik Informatika Universitas Madura yang merancang aplikasi web untuk operasional rumah sakit: dari analisis kebutuhan, database, hingga sistem yang siap dipakai.</p>
     <div class="btns">
       <a class="btn pri" href="#proyek">Lihat proyek</a>
-      <div class="cvwrap"><button type="button" class="btn sec" aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv/cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv/cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
+      <div class="cvwrap"><button type="button" class="btn sec" aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
       <a class="btn sec" href="#kontak">Hubungi saya</a>
     </div>
   </div>
   <figure class="photo">
-    <div class="frame"><img src="images/fiqrih.jpeg" alt="Foto Ach. Fiqrih Fahrezi" width="760" height="950"></div>
+    <div class="frame"><img src="fiqrih.jpeg" alt="Foto Ach. Fiqrih Fahrezi" width="760" height="950"></div>
   </figure>
   </div>
   <svg class="ecg" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
@@ -288,383 +290,10 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
       <p>Saya suka belajar hal baru, nyaman bekerja dalam tim, dan memakai AI sebagai alat untuk mempercepat pengembangan dan dokumentasi. Selain coding, saya menguasai Microsoft Office dan aplikasi desain seperti Canva.</p>
     </div>
     <div class="stats rv" style="--d:.15s">
-      <div class="stat"><b data-n="7">0</b><span>Proyek web full-stack</span></div>
-      <div class="stat"><b data-n="3">0</b><span>Sistem untuk rumah sakit</span></div>
-      <div class="stat"><b data-n="3.44" data-f="2">0</b><span>IPK S1 Informatika (skala 4)</span></div>
-      <div class="stat"><b data-n="2">0</b><span>Sertifikasi kompetensi</span></div>
-=======
-
-    <!-- Mouse Glow -->
-
-    <!-- <div class="cursor"></div>
-
-    <div class="cursor2"></div> -->
-
-    <!-- Animated Background -->
-
-    <div class="gradient"></div>
-
-    <div class="blob blob1"></div>
-
-    <div class="blob blob2"></div>
-
-    <div class="blob blob3"></div>
-
-    <!-- Navbar -->
-
-    <header>
-
-        <div class="logo">
-
-            DEV. 
-
-        </div>
-
-        <nav>
-
-            <a href="#home">Home</a>
-
-            <a href="#about">About</a>
-
-            <a href="#skills">Skills</a>
-
-            <a href="#projects">Projects</a>
-
-            <a href="#contact">Contact</a>
-
-            
-        </nav>
-
-    </header>
-
-    <!-- Hero -->
-
-    <section id="home" class="hero">
-
-        <div class="hero-text">
-
-            <p>Hello 👋 I'm</p>
-
-            <h1>ACH. FIQRIH FAHREZI</h1>
-
-            <h2>
-
-                <span class="typing"></span>
-
-            </h2>
-
-            <p class="desc">
-
-                Creating modern, visually stunning websites with smooth interactions, exceptional user experiences, and clean, maintainable code.
-
-            </p>
-
-            <div class="buttons">
-
-               <a href="cv/Ach. Fiqrih Fahrezi.pdf" download class="btn" target="_blank" > <i class="fa-solid fa-download"></i> Download CV (ID) </a>
-
-                <a href="#projects" class="outline" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                    View Project
-                </a>
-
-                <!-- <button class="outline">
-
-                    View Project 
-
-                </button> -->
-
-            </div>
-        </div>
-
-        <div class="hero-image">
-
-            <div class="circle"></div>
-
-            <img src="images/profile.png">
-
-        </div>
-
-    </section>
-
-    <!-- About -->
-
-    <section id="about">
-
-        <h2 class="title">
-
-            About Me
-
-        </h2>
-
-        <div class="about">
-
-            <div>
-
-                <h3>
-
-                    Passionate Web Developer
-
-                </h3>
-
-                <p>
-
-                    Sebagai Full Stack Developer, saya membantu bisnis dan perusahaan membangun aplikasi web yang modern, cepat, dan mudah digunakan. Saya mengembangkan berbagai solusi digital seperti sistem permintaan barang, manajemen inventaris, dashboard admin, rekrutmen, serta aplikasi berbasis web yang dirancang untuk mengotomatisasi proses administrasi, meningkatkan produktivitas, dan mendukung pertumbuhan perusahaan menggunakan Laravel dan teknologi web modern.
-
-                </p>
-
-            </div>
-
-            <div class="stats">
-
-                <div>
-
-                    <h1 data-number="45">3</h1>
-
-                    <p>Projects</p>
-
-                </div>
-
-                <div>
-
-                    <h1 data-number="20">1</h1>
-
-                    <p>Clients</p>
-
-                </div>
-
-                <div>
-
-                    <h1 data-number="3">1</h1>
-
-                    <p>Years</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Skills -->
-
-    <section id="skills">
-
-        <h2 class="title">
-
-            My Skills
-
-        </h2>
-
-        <div class="skill">
-
-            <span>HTML</span>
-
-            <div class="bar">
-
-                <div style="width:95%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>CSS</span>
-
-            <div class="bar">
-
-                <div style="width:90%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>JavaScript</span>
-
-            <div class="bar">
-
-                <div style="width:88%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>Laravel</span>
-
-            <div class="bar">
-
-                <div style="width:92%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>Python</span>
-
-            <div class="bar">
-
-                <div style="width:85%"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Projects -->
-
-    <section id="projects">
-
-        <h2 class="title">
-
-            Featured Projects
-
-        </h2>
-
-               <div class="cards">
-            <!-- Kartu 1: FIXORA -->
-            <a href="projects/fixora.html" class="card-link">
-                <div class="card">
-                    <img src="images/fixora.png">
-                    <div class="content">
-                        <h3>Dashboard FIXORA</h3>
-                        <p> Pembuatan aplikasi Permintaan dan perbaikan barang  </p><br>
-                        <p>Laravel • MySQL • Boostrap</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Kartu 2: Pengadaan -->
-            <a href="#" target="_blank" class="card-link">
-                <div class="card">
-                    <img src="images/project2.png">
-                    <div class="content">
-                        <h3>Pengadaan</h3>
-                        <p>Laravel • MariaDb • Boostrap</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Kartu 3: Portfolio -->
-            <a href="#" class="card-link">
-                <div class="card">
-                    <img src="images/portofolio.png">
-                    <div class="content">
-                        <h3>Portfolio</h3>
-                        <p>HTML • CSS • JavaScript</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-    </section>
-
-  <!-- Contact -->
-<section id="contact">
-    <h2 class="title">📬 Get In Touch</h2>
-    
-    <div class="contact-wrapper">
-        <!-- Left - Contact Info -->
-        <!-- Left - Services Offered -->
-<div class="contact-info-left">
-    <div class="services-header">
-        <span class="services-badge">
-            <i class="fa-solid fa-briefcase"></i>
-            Freelance Services
-        </span>
-        <h3>I Can Help You With</h3>
-        <p>
-            Di sela-sela pekerjaan utama saya, saya menawarkan jasa freelance 
-            yang bisa dikerjakan secara <strong>WFH</strong> atau <strong>remote</strong>. 
-            Fleksibel dan bisa disesuaikan dengan kebutuhan Anda.
-        </p>
-    </div>
-
-    <!-- Service List -->
-    <div class="services-list">
-        <!-- Service 1 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #00E5FF;">
-                <i class="fa-solid fa-pen-fancy"></i>
-            </div>
-            <div class="service-content">
-                <h4>Content Writing & Copywriting</h4>
-                <p>Penulisan artikel, caption sosial media, deskripsi produk, dan konten promosi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ffd93d;">
-                <i class="fa-solid fa-database"></i>
-            </div>
-            <div class="service-content">
-                <h4>Data Entry & Admin Support</h4>
-
-                <p>Input data,整理 file, rekap laporan, administrasi online, dan dokumentasi.</p>
-
-                <p>Input data, file, rekap laporan, administrasi online, dan dokumentasi.</p>
-
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ff6b6b;">
-                <i class="fa-solid fa-file-word"></i>
-            </div>
-            <div class="service-content">
-                <h4>Document & Report Writing</h4>
-                <p>Pembuatan laporan, proposal, surat menyurat, dan dokumen administrasi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 4 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #a29bfe;">
-                <i class="fa-solid fa-file-pdf"></i>
-            </div>
-            <div class="service-content">
-                <h4>Design & Layout Simple</h4>
-                <p>Desain sederhana: poster, pamflet, infografis, dan presentasi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 5 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ffd93d;">
-                <i class="fa-solid fa-clock"></i>
-            </div>
-            <div class="service-content">
-                <h4>Virtual Assistant</h4>
-                <p>Asisten online: manajemen email, jadwal, riset, dan tugas administratif lainnya.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 6 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #6bcbff;">
-                <i class="fa-solid fa-language"></i>
-            </div>
-            <div class="service-content">
-                <h4>Translation & Proofreading</h4>
-                <p>Terjemahan Indonesia-Inggris dan proofreading dokumen.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
->>>>>>> origin/main
+      <div class="stat"><b data-n="7">7</b><span>Proyek web full-stack</span></div>
+      <div class="stat"><b data-n="3">3</b><span>Sistem untuk rumah sakit</span></div>
+      <div class="stat"><b data-n="3.44" data-f="2">3.44</b><span>IPK S1 Informatika (skala 4)</span></div>
+      <div class="stat"><b data-n="2">2</b><span>Sertifikasi kompetensi</span></div>
     </div>
   </div>
 </div></section>
@@ -709,13 +338,28 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
     <button class="chip on" data-f="all">Semua</button><button class="chip" data-f="rs">Rumah sakit</button>
     <button class="chip" data-f="pes">Pesantren</button><button class="chip" data-f="pri">Pribadi</button>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid">
+    <article class="card rv" data-c="rs" style="--d:0s"><span class="tag">Rumah sakit · RSUD Mohammad Zyn</span><h3>Kordik: Koordinasi Pendidikan Klinik</h3><p>Sistem web untuk mengoordinasikan pendidikan klinik di rumah sakit, dibangun end-to-end dengan database relasional, backend logika bisnis, dan antarmuka responsif.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div></article>
+    <article class="card rv" data-c="rs" style="--d:0.08s"><span class="tag">Rumah sakit · RSUD Mohammad Zyn</span><h3>Pendaftaran Direktur Rumah Sakit</h3><p>Sistem pendaftaran dan administrasi seleksi calon direktur, mulai dari pengelolaan data calon sampai proses penyaringan.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div></article>
+    <article class="card rv" data-c="rs" style="--d:0.16s"><span class="tag">Rumah sakit · RSUD Mohammad Zyn</span><h3>Fixora: Pengadaan & Pemeliharaan Barang</h3><p>Digitalisasi pengadaan dan pemeliharaan barang agar manajemen inventaris rumah sakit lebih efisien dan tercatat rapi.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div></article>
+    <article class="card rv" data-c="pes" style="--d:0s"><span class="tag">Pesantren · Proyek akhir</span><h3>Sistem Pembelajaran Digital Pesantren</h3><p>Website pembelajaran untuk santri dan pengajar: pengelolaan materi, data pengguna, dan aktivitas akademik dalam satu sistem.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div></article>
+    <article class="card rv" data-c="pes" style="--d:0.08s"><span class="tag">Pesantren · Kerja praktik</span><h3>Website Manajemen Pondok Pesantren</h3><p>Aplikasi manajemen dan pendaftaran santri dengan tampilan responsif serta pengelolaan data yang terstruktur.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span></div></article>
+    <article class="card rv" data-c="pri" style="--d:0.16s"><span class="tag">Proyek pribadi</span><h3>Aplikasi Pengarsipan Dokumen</h3><p>Aplikasi web untuk menyimpan, mengelompokkan, dan mencari dokumen secara terstruktur.</p><div class="stack"><span>PHP</span><span>Laravel</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div></article>
+    <article class="card rv" data-c="pri" style="--d:0s"><span class="tag">Proyek pribadi</span><h3>Web Portofolio Pribadi</h3><p>Situs portofolio statis dengan antarmuka responsif untuk menampilkan pengalaman dan proyek.</p><div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></article>
+  </div>
 </div></section>
 
 <section id="keahlian"><div class="wrap">
   <h2 class="rv">Keahlian</h2>
   <p class="lead rv">Teknologi yang saya pakai sehari-hari dan kemampuan yang mendukungnya.</p>
-  <div class="skills" id="skills"></div>
+  <div class="skills" id="skills">
+    <div class="sk rv" style="--d:0s"><h3>Pemrograman & web</h3><div class="pills"><span>PHP</span><span>Laravel</span><span>HTML & CSS</span><span>JavaScript</span><span>MySQL</span><span>Full-stack</span><span>Frontend</span><span>Backend</span><span>Vibe coding</span></div></div>
+    <div class="sk rv" style="--d:0.08s"><h3>IT & quality assurance</h3><div class="pills"><span>Pengujian aplikasi</span><span>Debugging</span><span>Instalasi software</span><span>Instalasi Windows</span><span>Troubleshooting hardware & software</span></div></div>
+    <div class="sk rv" style="--d:0.16s"><h3>Perkantoran & desain</h3><div class="pills"><span>Microsoft Word</span><span>Microsoft Excel</span><span>Microsoft PowerPoint</span><span>Canva</span><span>CapCut</span></div></div>
+    <div class="sk rv" style="--d:0s"><h3>Data & administrasi</h3><div class="pills"><span>Entri data</span><span>Pengolahan data</span><span>Pengarsipan dokumen</span><span>Research & development</span></div></div>
+    <div class="sk rv" style="--d:0.08s"><h3>Kecerdasan buatan</h3><div class="pills"><span>AI untuk produktivitas</span><span>AI untuk pengembangan aplikasi</span><span>Konten berbantuan AI</span><span>Optimasi alur kerja</span></div></div>
+    <div class="sk rv" style="--d:0.16s"><h3>Soft skills</h3><div class="pills"><span>Kepemimpinan</span><span>Manajemen waktu</span><span>Kerja sama tim</span><span>Berpikir kritis</span><span>Komunikasi</span><span>Pemecahan masalah</span></div></div>
+  </div>
 </div></section>
 
 <section id="pendidikan"><div class="wrap">
@@ -734,38 +378,15 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
   </div>
 </div></section>
 
-
 <section id="kontak"><div class="wrap">
   <div class="cta rv">
     <h2>Punya proyek atau lowongan yang cocok?</h2>
     <p>Saya terbuka untuk diskusi pengembangan aplikasi web. Kirim pesan, saya balas secepatnya.</p>
     <div class="btns" style="justify-content:center">
       <a class="btn pri" href="mailto:contactfiqrih@gmail.com">Kirim email</a>
-      <div class="cvwrap up"><button type="button" class="btn " aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv/cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv/cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
+      <div class="cvwrap up"><button type="button" class="btn " aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
       <a class="btn" href="https://wa.me/6281911982396" target="_blank" rel="noopener">WhatsApp</a>
       <a class="btn" href="https://linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank" rel="noopener">LinkedIn</a>
-=======
-    <div class="social-links">
-        <a href="https://www.linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank" aria-label="LinkedIn">
-            <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a href="#" target="_blank" aria-label="GitHub">
-            <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://wa.me/6281911982396" target="_blank" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="https://www.instagram.com/fiqrihfahrezi_?igsi=OXJyNDEydmk4NW9w" target="_blank" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <a href="mailto:fiqrihfahrezi127@gmail.com" aria-label="Email">
-
-        <a href="mailto:contactfiqrih@gmail.com" aria-label="Email">
-
-            <i class="fa-solid fa-envelope"></i>
-        </a>
->>>>>>> origin/main
     </div>
   </div>
 </div></section>
@@ -778,26 +399,6 @@ const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelect
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 $('#yr').textContent=new Date().getFullYear();
 
-/* data */
-const projects=[
- {t:'Kordik: Koordinasi Pendidikan Klinik',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Sistem web untuk mengoordinasikan pendidikan klinik di rumah sakit, dibangun end-to-end dengan database relasional, backend logika bisnis, dan antarmuka responsif.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
- {t:'Pendaftaran Direktur Rumah Sakit',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Sistem pendaftaran dan administrasi seleksi calon direktur, mulai dari pengelolaan data calon sampai proses penyaringan.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
- {t:'Fixora: Pengadaan & Pemeliharaan Barang',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Digitalisasi pengadaan dan pemeliharaan barang agar manajemen inventaris rumah sakit lebih efisien dan tercatat rapi.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
- {t:'Sistem Pembelajaran Digital Pesantren',c:'pes',tag:'Pesantren · Proyek akhir',d:'Website pembelajaran untuk santri dan pengajar: pengelolaan materi, data pengguna, dan aktivitas akademik dalam satu sistem.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
- {t:'Website Manajemen Pondok Pesantren',c:'pes',tag:'Pesantren · Kerja praktik',d:'Aplikasi manajemen dan pendaftaran santri dengan tampilan responsif serta pengelolaan data yang terstruktur.',s:['PHP','Laravel','MySQL','Bootstrap']},
- {t:'Aplikasi Pengarsipan Dokumen',c:'pri',tag:'Proyek pribadi',d:'Aplikasi web untuk menyimpan, mengelompokkan, dan mencari dokumen secara terstruktur.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
- {t:'Web Portofolio Pribadi',c:'pri',tag:'Proyek pribadi',d:'Situs portofolio statis dengan antarmuka responsif untuk menampilkan pengalaman dan proyek.',s:['HTML','CSS','JavaScript']}
-];
-const skills=[
- ['Pemrograman & web',['PHP','Laravel','HTML & CSS','JavaScript','MySQL','Full-stack','Frontend','Backend','Vibe coding']],
- ['IT & quality assurance',['Pengujian aplikasi','Debugging','Instalasi software','Instalasi Windows','Troubleshooting hardware & software']],
- ['Perkantoran & desain',['Microsoft Word','Microsoft Excel','Microsoft PowerPoint','Canva','CapCut']],
- ['Data & administrasi',['Entri data','Pengolahan data','Pengarsipan dokumen','Research & development']],
- ['Kecerdasan buatan',['AI untuk produktivitas','AI untuk pengembangan aplikasi','Konten berbantuan AI','Optimasi alur kerja']],
- ['Soft skills',['Kepemimpinan','Manajemen waktu','Kerja sama tim','Berpikir kritis','Komunikasi','Pemecahan masalah']]
-];
-$('#grid').innerHTML=projects.map((p,i)=>`<article class="card rv" data-c="${p.c}" style="--d:${(i%3)*.08}s"><span class="tag">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p><div class="stack">${p.s.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
-$('#skills').innerHTML=skills.map((k,i)=>`<div class="sk rv" style="--d:${(i%3)*.08}s"><h3>${k[0]}</h3><div class="pills">${k[1].map(x=>`<span>${x}</span>`).join('')}</div></div>`).join('');
 
 /* typing */
 const words=['aplikasi web rumah sakit','sistem inventaris digital','platform belajar online','antarmuka yang mudah dipakai'];
@@ -812,70 +413,9 @@ const words=['aplikasi web rumah sakit','sistem inventaris digital','platform be
 /* reveal + counters */
 const count=el=>{const n=+el.dataset.n,f=+el.dataset.f||0;if(reduce){el.textContent=n.toFixed(f);return}
  const t0=performance.now();(function s(t){const p=Math.min((t-t0)/1400,1),e=1-Math.pow(1-p,4);el.textContent=(n*e).toFixed(f);if(p<1)requestAnimationFrame(s)})(t0)};
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');$$('[data-n]',e.target).forEach(count);io.unobserve(e.target)}}),{threshold:.15});
-$$('.rv').forEach(el=>io.observe(el));
-=======
-    <!-- CTA Buttons -->
-
-    <div class="cta-actions">
-        <a href="mailto:fiqrihfahrezi127@gmail.com?subject=Lowongan%20Pekerjaan%20-%20Full%20Stack%20Developer&body=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda%20dan%20ingin%20mengundang%20Anda%20untuk%20bergabung%20dengan%20tim%20kami.%0A%0ABerikut%20detail%20lowongan:%0A-%20Posisi:%0A-%20Lokasi:%0A-%20Tipe%20Pekerjaan:%0A%0ATerima%20kasih." 
-
-    <!-- <div class="cta-actions">
-        <a href="mailto:contactfiqrih@gmail.com?subject=Lowongan%20Pekerjaan%20-%20Full%20Stack%20Developer&body=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda%20dan%20ingin%20mengundang%20Anda%20untuk%20bergabung%20dengan%20tim%20kami.%0A%0ABerikut%20detail%20lowongan:%0A-%20Posisi:%0A-%20Lokasi:%0A-%20Tipe%20Pekerjaan:%0A%0ATerima%20kasih." 
-
-           class="cta-btn cta-primary">
-            <i class="fa-regular fa-envelope"></i>
-            Kirim Email
-            <span class="btn-sub">Langsung ke HRD</span>
-        </a>
-        
-        <a href="https://wa.me/6281911982396?text=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda.%20Saya%20melihat%20Anda%20seorang%20Full%20Stack%20Developer%20yang%20handal.%0A%0AApakah%20Anda%20saat%20ini%20mencari%20pekerjaan%20atau%20open%20for%20collaboration?%0A%0AMari%20kita%20bicarakan%20lebih%20lanjut." 
-           class="cta-btn cta-whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-            Chat WhatsApp
-            <span class="btn-sub">Respon Cepat</span>
-        </a>
-
-    </div>
-
-    </div> 
-
-
-    <!-- Quick Info -->
-    <div class="quick-info">
-        <div class="info-item">
-            <i class="fa-regular fa-file-pdf"></i>
-            <div>
-                <span>CV / Resume</span>
-
-                <a href="cv/cv_fiqrih_fahrezi.pdf" download>
-
-                <a href="cv/Ach. Fiqrih Fahrezi.pdf" download>
-
-                    Download <i class="fa-solid fa-download"></i>
-                </a>
-            </div>
-        </div>
-        <div class="info-item">
-            <i class="fa-brands fa-linkedin"></i>
-            <div>
-                <span>LinkedIn</span>
-                <a href="https://www.linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank">
-                    Connect <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-        </div>
-        <div class="info-item">
-            <i class="fa-brands fa-github"></i>
-            <div>
-                <span>GitHub</span>
-                <a href="#" target="_blank">
-                    Portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-        </div>
-    </div>
->>>>>>> origin/main
+$$('.rv').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight*.92){el.classList.add('pre');$$('[data-n]',el).forEach(b=>b.textContent=(0).toFixed(+b.dataset.f||0))}});
+const revealAll=()=>{$$('.rv.pre:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.92){el.classList.add('in');$$('[data-n]',el).forEach(count)}})};
+addEventListener('scroll',revealAll,{passive:true});addEventListener('resize',revealAll);addEventListener('load',revealAll);setTimeout(revealAll,300);
 
 /* filters */
 $('#filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
