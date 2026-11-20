@@ -1,640 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ach. Fiqrih Fahrezi – Web Developer</title>
+<meta name="description" content="Portofolio Ach. Fiqrih Fahrezi, Web Developer & Staff Unit SIMRS RSUD Mohammad Zyn Sampang.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F2ED; --surface:#FFFFFF; --ink:#2A1C14; --muted:#76655A; --line:#E6DCD1;
+  --teal:#8B5A3C; --teal-d:#6B4128; --coral:#C8963E; --mint:#F0E4D7;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'DM Sans','Segoe UI',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+:root[data-theme="dark"]{
+  --bg:#17100B; --surface:#231910; --ink:#F4EBE1; --muted:#B5A394; --line:#3A2B20;
+  --teal:#D4A47C; --teal-d:#E8C1A0; --coral:#E6B55F; --mint:#33241A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden;transition:background .4s,color .4s}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em}
+section{padding:96px 0}
+h2{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;margin-bottom:14px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:44px}
 
-    <meta charset="UTF-8">
+/* progress + glow */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--teal),var(--coral));z-index:100}
+#glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(139,90,60,.16),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%;transition:opacity .3s}
+main,header,footer{position:relative;z-index:1}
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+/* nav */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:6px;
+  padding:8px 10px;border-radius:999px;background:color-mix(in srgb,var(--surface) 82%,transparent);
+  backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 8px 30px rgba(42,28,20,.08);max-width:calc(100% - 24px);overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{padding:7px 14px;border-radius:999px;font-size:.9rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:.25s var(--ease)}
+nav a:hover,nav a.on{background:var(--mint);color:var(--teal-d)}
+#theme{border:0;background:var(--ink);color:var(--bg);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;flex:none;transition:transform .4s var(--ease)}
+#theme:hover{transform:rotate(25deg) scale(1.08)}
 
-    <title>Fiqrih | Full Stack Developer</title>
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 60px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.status{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line);background:var(--surface);border-radius:999px;font-size:.88rem;font-weight:500;margin-bottom:26px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--coral);position:relative}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--coral);animation:ping 1.6s infinite}
+@keyframes ping{to{transform:scale(3.2);opacity:0}}
+.hero h1{font-size:clamp(2.9rem,9vw,6.6rem);font-weight:800;margin-bottom:18px}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:inline-block;transform:translateY(105%);animation:up .9s var(--ease) forwards}
+.hero h1 .ln:nth-child(2) span{animation-delay:.12s;color:var(--teal)}
+@keyframes up{to{transform:none}}
+.role{font-family:var(--display);font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:500;min-height:2em;color:var(--muted)}
+.role b{color:var(--ink);font-weight:700}
+.caret{display:inline-block;width:3px;height:1.1em;background:var(--coral);margin-left:3px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.sum{max-width:56ch;margin:16px 0 30px;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--ink);transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(42,28,20,.18)}
+.btn.sec:hover{background:var(--mint)}
+.ecg{position:absolute;left:0;right:0;bottom:6%;width:100%;height:150px;opacity:.9;pointer-events:none}
+.ecg path{fill:none;stroke:var(--coral);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:beat 4.8s linear infinite}
+.ecg .ghost{stroke:var(--line);stroke-width:2;animation:none;stroke-dasharray:none}
+@keyframes beat{0%{stroke-dashoffset:1}70%,100%{stroke-dashoffset:0}}
+.scroll{position:absolute;right:24px;bottom:36px;font-size:.8rem;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px}
+.scroll i{width:1px;height:50px;background:var(--muted);transform-origin:top;animation:grow 2s var(--ease) infinite}
+@keyframes grow{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-    <!-- Google Font -->
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
 
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
+/* about */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+.about p{color:var(--muted);margin-bottom:14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px}
+.stat b{font-family:var(--display);font-size:2.4rem;font-weight:800;color:var(--teal);display:block;line-height:1}
+.stat span{font-size:.88rem;color:var(--muted)}
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+/* timeline */
+.tl{position:relative;padding-left:34px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl .fill{position:absolute;left:7px;top:6px;width:2px;height:0;background:linear-gradient(var(--teal),var(--coral))}
+.job{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-bottom:20px;transition:transform .35s var(--ease),border-color .35s}
+.job:hover{transform:translateX(6px);border-color:var(--teal)}
+.job::before{content:"";position:absolute;left:-34px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--teal)}
+.job.now::before{background:var(--coral);border-color:var(--coral);box-shadow:0 0 0 6px rgba(200,150,62,.28)}
+.job h3{font-size:1.25rem;margin-bottom:2px}
+.job .meta{color:var(--muted);font-size:.9rem;margin-bottom:10px}
+.job ul{padding-left:18px;color:var(--muted);font-size:.95rem}
+.job li{margin-bottom:5px}
 
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:8px 16px;border-radius:999px;font:500 .9rem var(--body);cursor:pointer;transition:.25s var(--ease)}
+.chip:hover{border-color:var(--teal);color:var(--teal-d)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
+  transform-style:preserve-3d;transition:transform .25s ease-out,border-color .3s,opacity .4s,box-shadow .3s}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(139,90,60,.14),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{border-color:var(--teal);box-shadow:0 18px 40px rgba(42,28,20,.12)}
+.card:hover::after{opacity:1}
+.card.hide{display:none}
+.tag{align-self:flex-start;font-size:.78rem;font-weight:600;padding:4px 11px;border-radius:999px;background:var(--mint);color:var(--teal-d)}
+.card h3{font-size:1.28rem}
+.card p{color:var(--muted);font-size:.94rem;flex:1}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack span{font-size:.78rem;border:1px solid var(--line);border-radius:8px;padding:3px 9px;color:var(--muted)}
 
-    <!-- Icons -->
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.sk{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px}
+.sk h3{font-size:1.1rem;margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{padding:7px 14px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.88rem;transition:.25s var(--ease)}
+.pills span:hover{background:var(--teal);color:var(--bg);border-color:var(--teal);transform:translateY(-3px)}
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+/* edu */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px}
+.box h3{font-size:1.15rem;margin-bottom:16px}
+.item{padding:14px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.item b{display:block;font-weight:600}
+.item small{color:var(--muted);display:block}
 
-    <!-- CSS -->
+/* contact */
+.cta{background:var(--ink);color:var(--bg);border-radius:32px;padding:clamp(34px,6vw,70px);text-align:center;position:relative;overflow:hidden}
+.cta h2{color:var(--bg)}
+.cta p{opacity:.75;max-width:48ch;margin:0 auto 28px}
+.cta .btn{border-color:var(--bg);color:var(--bg)}
+.cta .btn.pri{background:var(--coral);border-color:var(--coral);color:#2A1C14}
+.cta::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(212,164,124,.32),transparent 65%);top:-160px;right:-100px;animation:float 9s ease-in-out infinite}
+@keyframes float{50%{transform:translate(-50px,40px)}}
+.cta>*{position:relative}
+footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.9rem}
 
-    <link rel="stylesheet"
-        href="style.css">
 
+.hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;z-index:1}
+.hero .hgrid h1{font-size:clamp(2.7rem,6.6vw,5.2rem)}
+.ecg{z-index:0}
+.photo{position:relative;justify-self:center;width:min(100%,380px);margin:0}
+.photo .frame{position:relative;aspect-ratio:4/5;border-radius:999px 999px 32px 32px;overflow:hidden;background:var(--mint);
+  border:1px solid var(--line);box-shadow:0 30px 60px rgba(42,28,20,.18);animation:reveal 1.3s var(--ease) .25s both}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.12);animation:settle 1.6s var(--ease) .25s forwards}
+.photo::before{content:"";position:absolute;inset:-14px;border-radius:999px 999px 40px 40px;border:2px dashed var(--teal);opacity:.55;animation:spin 1s var(--ease) .6s both}
+@keyframes reveal{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0)}}
+@keyframes settle{to{transform:scale(1)}}
+@keyframes spin{from{opacity:0;transform:scale(.92)}to{opacity:.55;transform:none}}
+.fchip{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:16px;background:var(--surface);
+  border:1px solid var(--line);box-shadow:0 14px 30px rgba(42,28,20,.14);font-size:.86rem;font-weight:600;animation:bob 5s ease-in-out infinite,pop .7s var(--ease) 1.3s both}
+.fchip small{display:block;font-weight:400;color:var(--muted);font-size:.76rem;line-height:1.2}
+.fchip.a{left:-26px;bottom:18%}
+.fchip.b{right:-22px;top:14%;animation-delay:-2.5s,1.6s}
+.fchip i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--mint);font-style:normal}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@keyframes pop{from{opacity:0;scale:.7}to{opacity:1;scale:1}}
+@media(max-width:860px){
+  .hgrid{grid-template-columns:1fr;gap:34px}
+  .photo{order:-1;width:min(78%,300px)}
+  .fchip.a{left:-10px}.fchip.b{right:-10px}
+}
+@media(prefers-reduced-motion:reduce){.photo .frame{clip-path:none}.photo img{transform:none}.fchip{opacity:1;scale:1}}
+@media(max-width:760px){
+  section{padding:70px 0}
+  .about{grid-template-columns:1fr}
+  .scroll{display:none}
+  .ecg{height:100px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  .hero h1 .ln span{transform:none}
+  .ecg path{stroke-dashoffset:0}
+}
+
+/* ===== responsive fixes ===== */
+.hero{min-height:100vh;min-height:100svh;padding:120px 0 190px}
+.ecg{bottom:14px;height:130px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr))}
+.skills{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+img{max-width:100%}
+@media(max-width:860px){
+  .hero{padding:104px 0 150px}
+  .ecg{height:100px}
+  .photo{width:min(68%,270px)}
+}
+@media(max-width:600px){
+  .wrap{padding:0 18px}
+  section{padding:60px 0}
+  .hero{padding:92px 0 130px}
+  .ecg{height:80px;bottom:10px;opacity:.7}
+  .hero .hgrid h1{font-size:clamp(2.2rem,12vw,3.2rem)}
+  .status{border-radius:16px;font-size:.82rem;line-height:1.4}
+  .hero p.sum{font-size:.95rem;margin:14px 0 24px}
+  .btns{gap:10px}
+  .btn{padding:12px 20px;font-size:.95rem}
+  nav{top:10px;padding:6px 8px;gap:2px}
+  nav a{padding:6px 10px;font-size:.8rem}
+  #theme{width:30px;height:30px;font-size:.9rem}
+  .stats{gap:10px}
+  .stat{padding:16px}
+  .stat b{font-size:1.9rem}
+  .tl{padding-left:26px}
+  .job{padding:18px 18px}
+  .job::before{left:-26px;top:24px;width:14px;height:14px}
+  .job h3{font-size:1.1rem}
+  .card,.sk,.box{padding:20px}
+  .cta{border-radius:24px}
+  #glow{display:none}
+}
+
+/* ===== CV menu ===== */
+button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
+.cvwrap{position:relative;display:inline-block}
+.chev{transition:transform .3s var(--ease)}
+.cvwrap.open .chev{transform:rotate(180deg)}
+.cvmenu{position:absolute;left:0;top:calc(100% + 10px);min-width:250px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;
+  box-shadow:0 20px 44px rgba(42,28,20,.2);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);transform-origin:top left;
+  transition:opacity .25s var(--ease),transform .3s var(--ease),visibility .3s;z-index:30;text-align:left}
+.cvwrap.open .cvmenu{opacity:1;visibility:visible;transform:none}
+.cvwrap.up .cvmenu{top:auto;bottom:calc(100% + 10px);transform-origin:bottom left;transform:translateY(8px) scale(.97)}
+.cvwrap.up.open .cvmenu{transform:none}
+.cvmenu a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;color:var(--ink);font-weight:600;transition:background .2s,transform .25s var(--ease)}
+.cvmenu a:hover{background:var(--mint);transform:translateX(3px)}
+.cvmenu .fl{width:36px;height:36px;border-radius:10px;background:var(--mint);display:grid;place-items:center;font-size:.78rem;font-weight:700;color:var(--teal-d);flex:none}
+.cvmenu a:hover .fl{background:var(--teal);color:var(--bg)}
+.cvmenu small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;line-height:1.3}
+@media(max-width:600px){
+  .cvmenu,.cvwrap.up .cvmenu{position:fixed;left:14px;right:14px;top:auto;bottom:14px;min-width:0;transform-origin:bottom center;transform:translateY(24px)}
+  .cvwrap.open .cvmenu,.cvwrap.up.open .cvmenu{transform:none}
+}
+</style>
 </head>
-
 <body>
+<div id="bar"></div><div id="glow"></div>
 
-    <!-- Loading -->
+<nav aria-label="Navigasi utama">
+  <a href="#home" class="on">Beranda</a><a href="#tentang">Tentang</a><a href="#pengalaman">Pengalaman</a>
+  <a href="#proyek">Proyek</a><a href="#keahlian">Keahlian</a><a href="#kontak">Kontak</a>
+  <button id="theme" aria-label="Ganti tema terang/gelap">🌙</button>
+</nav>
 
-    <div class="loader">
-
-        <div class="spinner"></div>
-
-        <h2>Loading Portfolio...</h2>
-
+<header class="hero" id="home">
+  <div class="wrap hgrid"><div class="htxt">
+    <div class="status"><span class="dot"></span>Staff Unit SIMRS di RSUD Mohammad Zyn Sampang</div>
+    <h1><span class="ln"><span>Ach. Fiqrih</span></span><span class="ln"><span>Fahrezi</span></span></h1>
+    <div class="role">Saya membangun <b id="typed"></b><span class="caret"></span></div>
+    <p class="sum">Lulusan Teknik Informatika Universitas Madura yang merancang aplikasi web untuk operasional rumah sakit: dari analisis kebutuhan, database, hingga sistem yang siap dipakai.</p>
+    <div class="btns">
+      <a class="btn pri" href="#proyek">Lihat proyek</a>
+      <div class="cvwrap"><button type="button" class="btn sec" aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv/cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv/cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
+      <a class="btn sec" href="#kontak">Hubungi saya</a>
     </div>
-
-    <!-- Mouse Glow -->
-
-    <!-- <div class="cursor"></div>
-
-    <div class="cursor2"></div> -->
-
-    <!-- Animated Background -->
-
-    <div class="gradient"></div>
-
-    <div class="blob blob1"></div>
-
-    <div class="blob blob2"></div>
-
-    <div class="blob blob3"></div>
-
-    <!-- Navbar -->
-
-    <header>
-
-        <div class="logo">
-
-            DEV. 
-
-        </div>
-
-        <nav>
-
-            <a href="#home">Home</a>
-
-            <a href="#about">About</a>
-
-            <a href="#skills">Skills</a>
-
-            <a href="#projects">Projects</a>
-
-            <a href="#contact">Contact</a>
-
-            
-        </nav>
-
-    </header>
-
-    <!-- Hero -->
-
-    <section id="home" class="hero">
-
-        <div class="hero-text">
-
-            <p>Hello 👋 I'm</p>
-
-            <h1>ACH. FIQRIH FAHREZI</h1>
-
-            <h2>
-
-                <span class="typing"></span>
-
-            </h2>
-
-            <p class="desc">
-
-                Creating modern, visually stunning websites with smooth interactions, exceptional user experiences, and clean, maintainable code.
-
-            </p>
-
-            <div class="buttons">
-
-               <a href="cv/Ach. Fiqrih Fahrezi.pdf" download class="btn" target="_blank" > <i class="fa-solid fa-download"></i> Download CV (ID) </a>
-
-<<<<<<< HEAD
-                <a href="#projects" class="outline" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                    View Project
-                </a>
-=======
->>>>>>> origin/main
-                <!-- <button class="outline">
-
-                    View Project 
-
-                </button> -->
-
-            </div>
-        </div>
-
-        <div class="hero-image">
-
-            <div class="circle"></div>
-
-            <img src="images/profile.png">
-
-        </div>
-
-    </section>
-
-    <!-- About -->
-
-    <section id="about">
-
-        <h2 class="title">
-
-            About Me
-
-        </h2>
-
-        <div class="about">
-
-            <div>
-
-                <h3>
-
-                    Passionate Web Developer
-
-                </h3>
-
-                <p>
-
-                    Sebagai Full Stack Developer, saya membantu bisnis dan perusahaan membangun aplikasi web yang modern, cepat, dan mudah digunakan. Saya mengembangkan berbagai solusi digital seperti sistem permintaan barang, manajemen inventaris, dashboard admin, rekrutmen, serta aplikasi berbasis web yang dirancang untuk mengotomatisasi proses administrasi, meningkatkan produktivitas, dan mendukung pertumbuhan perusahaan menggunakan Laravel dan teknologi web modern.
-
-                </p>
-
-            </div>
-
-            <div class="stats">
-
-                <div>
-
-                    <h1 data-number="45">3</h1>
-
-                    <p>Projects</p>
-
-                </div>
-
-                <div>
-
-                    <h1 data-number="20">1</h1>
-
-                    <p>Clients</p>
-
-                </div>
-
-                <div>
-
-                    <h1 data-number="3">1</h1>
-
-                    <p>Years</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Skills -->
-
-    <section id="skills">
-
-        <h2 class="title">
-
-            My Skills
-
-        </h2>
-
-        <div class="skill">
-
-            <span>HTML</span>
-
-            <div class="bar">
-
-                <div style="width:95%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>CSS</span>
-
-            <div class="bar">
-
-                <div style="width:90%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>JavaScript</span>
-
-            <div class="bar">
-
-                <div style="width:88%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>Laravel</span>
-
-            <div class="bar">
-
-                <div style="width:92%"></div>
-
-            </div>
-
-        </div>
-
-        <div class="skill">
-
-            <span>Python</span>
-
-            <div class="bar">
-
-                <div style="width:85%"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Projects -->
-
-    <section id="projects">
-
-        <h2 class="title">
-
-            Featured Projects
-
-        </h2>
-
-        <        <div class="cards">
-            <!-- Kartu 1: FIXORA -->
-            <a href="projects/fixora.html" class="card-link">
-                <div class="card">
-                    <img src="images/fixora.png">
-                    <div class="content">
-                        <h3>Dashboard FIXORA</h3>
-                        <p> Pembuatan aplikasi Permintaan dan perbaikan barang  </p><br>
-                        <p>Laravel • MySQL • Boostrap</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Kartu 2: Pengadaan -->
-            <a href="pengadaan_barang/login.html" target="_blank" class="card-link">
-                <div class="card">
-                    <img src="images/project2.png">
-                    <div class="content">
-                        <h3>Pengadaan</h3>
-                        <p>Laravel • MariaDb • Boostrap</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Kartu 3: Portfolio -->
-            <a href="projects/portfolio.html" class="card-link">
-                <div class="card">
-                    <img src="images/portofolio.png">
-                    <div class="content">
-                        <h3>Portfolio</h3>
-                        <p>HTML • CSS • JavaScript</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-    </section>
-
-  <!-- Contact -->
-<section id="contact">
-    <h2 class="title">📬 Get In Touch</h2>
-    
-    <div class="contact-wrapper">
-        <!-- Left - Contact Info -->
-        <!-- Left - Services Offered -->
-<div class="contact-info-left">
-    <div class="services-header">
-        <span class="services-badge">
-            <i class="fa-solid fa-briefcase"></i>
-            Freelance Services
-        </span>
-        <h3>I Can Help You With</h3>
-        <p>
-            Di sela-sela pekerjaan utama saya, saya menawarkan jasa freelance 
-            yang bisa dikerjakan secara <strong>WFH</strong> atau <strong>remote</strong>. 
-            Fleksibel dan bisa disesuaikan dengan kebutuhan Anda.
-        </p>
+  </div>
+  <figure class="photo">
+    <div class="frame"><img src="images/fiqrih.jpeg" alt="Foto Ach. Fiqrih Fahrezi" width="760" height="950"></div>
+  </figure>
+  </div>
+  <svg class="ecg" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+    <path class="ghost" d="M0 80 H300 l15-6 15 6 H420 l14 0 10-60 16 110 10-50 H560 l20-12 24 12 H1200"/>
+    <path pathLength="1" d="M0 80 H300 l15-6 15 6 H420 l14 0 10-60 16 110 10-50 H560 l20-12 24 12 H1200"/>
+  </svg>
+  <div class="scroll"><i></i>Scroll</div>
+</header>
+
+<main>
+<section id="tentang"><div class="wrap">
+  <div class="about">
+    <div class="rv">
+      <h2>Rapi dalam sistem, teliti dalam data.</h2>
+      <p>Saya terbiasa mengelola sistem dan data secara terstruktur. Di RSUD Mohammad Zyn Sampang, saya membuat dan mengembangkan aplikasi web yang membantu pekerjaan harian: inventaris, pendaftaran, hingga kebutuhan operasional kantor.</p>
+      <p>Saya suka belajar hal baru, nyaman bekerja dalam tim, dan memakai AI sebagai alat untuk mempercepat pengembangan dan dokumentasi. Selain coding, saya menguasai Microsoft Office dan aplikasi desain seperti Canva.</p>
     </div>
-
-    <!-- Service List -->
-    <div class="services-list">
-        <!-- Service 1 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #00E5FF;">
-                <i class="fa-solid fa-pen-fancy"></i>
-            </div>
-            <div class="service-content">
-                <h4>Content Writing & Copywriting</h4>
-                <p>Penulisan artikel, caption sosial media, deskripsi produk, dan konten promosi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ffd93d;">
-                <i class="fa-solid fa-database"></i>
-            </div>
-            <div class="service-content">
-                <h4>Data Entry & Admin Support</h4>
-<<<<<<< HEAD
-                <p>Input data,整理 file, rekap laporan, administrasi online, dan dokumentasi.</p>
-=======
-                <p>Input data, file, rekap laporan, administrasi online, dan dokumentasi.</p>
->>>>>>> origin/main
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ff6b6b;">
-                <i class="fa-solid fa-file-word"></i>
-            </div>
-            <div class="service-content">
-                <h4>Document & Report Writing</h4>
-                <p>Pembuatan laporan, proposal, surat menyurat, dan dokumen administrasi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 4 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #a29bfe;">
-                <i class="fa-solid fa-file-pdf"></i>
-            </div>
-            <div class="service-content">
-                <h4>Design & Layout Simple</h4>
-                <p>Desain sederhana: poster, pamflet, infografis, dan presentasi.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 5 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #ffd93d;">
-                <i class="fa-solid fa-clock"></i>
-            </div>
-            <div class="service-content">
-                <h4>Virtual Assistant</h4>
-                <p>Asisten online: manajemen email, jadwal, riset, dan tugas administratif lainnya.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
-
-        <!-- Service 6 -->
-        <div class="service-item">
-            <div class="service-icon" style="color: #6bcbff;">
-                <i class="fa-solid fa-language"></i>
-            </div>
-            <div class="service-content">
-                <h4>Translation & Proofreading</h4>
-                <p>Terjemahan Indonesia-Inggris dan proofreading dokumen.</p>
-                <span class="service-tag">Remote/WFH</span>
-            </div>
-        </div>
+    <div class="stats rv" style="--d:.15s">
+      <div class="stat"><b data-n="7">0</b><span>Proyek web full-stack</span></div>
+      <div class="stat"><b data-n="3">0</b><span>Sistem untuk rumah sakit</span></div>
+      <div class="stat"><b data-n="3.44" data-f="2">0</b><span>IPK S1 Informatika (skala 4)</span></div>
+      <div class="stat"><b data-n="2">0</b><span>Sertifikasi kompetensi</span></div>
     </div>
+  </div>
+</div></section>
 
-    <!-- Why Choose Me -->
-    <div class="why-choose">
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>Fast Response</span>
-        </div>
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>Quality Work</span>
-        </div>
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>Revisi sampai puas</span>
-        </div>
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>Harga Bersahabat</span>
-        </div>
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>Deadline Tepat</span>
-        </div>
-        <div class="why-item">
-            <i class="fa-regular fa-circle-check" style="color: #25D366;"></i>
-            <span>100% Remote</span>
-        </div>
+<section id="pengalaman"><div class="wrap">
+  <h2 class="rv">Pengalaman</h2>
+  <p class="lead rv">Perjalanan dari kerja praktik di pesantren sampai mengelola sistem rumah sakit.</p>
+  <div class="tl" id="tl"><span class="fill" id="fill"></span>
+    <article class="job now rv">
+      <h3>Staff Unit SIMRS</h3><div class="meta">RSUD Mohammad Zyn, Sampang · 2025 – sekarang</div>
+      <ul>
+        <li>Merancang dan mengembangkan aplikasi web untuk kebutuhan operasional kantor.</li>
+        <li>Meningkatkan aplikasi web yang sudah berjalan agar tetap sesuai kebutuhan sistem.</li>
+        <li>Membangun aplikasi pengadaan dan pemeliharaan barang untuk mendigitalisasi manajemen inventaris.</li>
+        <li>Membangun sistem pendaftaran direktur untuk mempermudah administrasi perekrutan.</li>
+        <li>Memperbaiki komputer, dari sisi hardware maupun software.</li>
+      </ul>
+    </article>
+    <article class="job rv">
+      <h3>Proyek Akhir: Sistem Pembelajaran Digital Berbasis Web</h3><div class="meta">PP. Darul Lughah Wad-dirosatil Islamiyah, Pamekasan · 2024</div>
+      <ul>
+        <li>Mengembangkan sistem pembelajaran web untuk proses belajar mengajar di pondok pesantren.</li>
+        <li>Menambah fitur pembelajaran, materi, dan akses pengguna.</li>
+        <li>Mengimplementasikan dan menguji sistem dengan PHP, Laravel, MySQL, Bootstrap, dan JavaScript.</li>
+      </ul>
+    </article>
+    <article class="job rv">
+      <h3>Kerja Praktik: Website Manajemen Pondok Pesantren</h3><div class="meta">PP. Darul Lughah Wad-dirosatil Islamiyah, Pamekasan · 2023</div>
+      <ul>
+        <li>Merancang aplikasi web untuk manajemen dan pendaftaran santri.</li>
+        <li>Membuat antarmuka responsif dan fitur pengelolaan data yang terstruktur.</li>
+        <li>Menguji dan memperbaiki sistem sampai berjalan optimal.</li>
+      </ul>
+    </article>
+  </div>
+</div></section>
+
+<section id="proyek"><div class="wrap">
+  <h2 class="rv">Proyek</h2>
+  <p class="lead rv">Semua proyek dikerjakan sebagai fullstack developer: analisis kebutuhan, database, backend, frontend, sampai pengujian.</p>
+  <div class="filters rv" id="filters">
+    <button class="chip on" data-f="all">Semua</button><button class="chip" data-f="rs">Rumah sakit</button>
+    <button class="chip" data-f="pes">Pesantren</button><button class="chip" data-f="pri">Pribadi</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="keahlian"><div class="wrap">
+  <h2 class="rv">Keahlian</h2>
+  <p class="lead rv">Teknologi yang saya pakai sehari-hari dan kemampuan yang mendukungnya.</p>
+  <div class="skills" id="skills"></div>
+</div></section>
+
+<section id="pendidikan"><div class="wrap">
+  <h2 class="rv">Pendidikan & sertifikasi</h2>
+  <div class="two" style="margin-top:34px">
+    <div class="box rv">
+      <h3>Pendidikan</h3>
+      <div class="item"><b>S1 Informatika, Fakultas Teknik</b><small>Universitas Madura, Pamekasan · 2020 – 2024</small><small>IPK 3.44 / 4.00</small></div>
+      <div class="item"><b>Jurusan Ilmu Pengetahuan Sosial</b><small>SMA Negeri 1 Sampang, Madura · 2017 – 2020</small><small>Nilai 88.47</small></div>
     </div>
-
-    <!-- CTA -->
-    <div class="services-cta">
-        <p>
-            <i class="fa-regular fa-hand-peace"></i>
-            Butuh bantuan? Chat aja! Saya siap bantu.
-        </p>
-        <div class="services-cta-buttons">
-            <a href="https://wa.me/6281911982396?text=Halo%20Fiqrih,%20saya%20tertarik%20dengan%20jasa%20freelance%20yang%20Anda%20tawarkan.%0A%0ASaya%20butuh%20bantuan%20untuk:" 
-               target="_blank" 
-               class="cta-wa-small">
-                <i class="fa-brands fa-whatsapp"></i>
-                Chat via WA
-            </a>
-            <a href="mailto:fiqrihfahrezi127@gmail.com?subject=Freelance%20Service%20Inquiry&body=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20jasa%20freelance%20Anda.%0A%0AYang%20saya%20butuhkan:%0A- %0A- %0A%0ATerima%20kasih!" 
-               class="cta-email-small">
-                <i class="fa-regular fa-envelope"></i>
-                Email
-            </a>
-        </div>
+    <div class="box rv" style="--d:.12s">
+      <h3>Sertifikasi kompetensi</h3>
+      <div class="item"><b>Python Fundamental</b><small>Aguna Course · 2024</small><small>Sintaks dasar, tipe data, percabangan, perulangan, fungsi, dan modul.</small></div>
+      <div class="item"><b>AI untuk Produktivitas Kerja Harian</b><small>PT Sumber Belajar Bersama (Edukasa) · 2026</small><small>Claude, Gemini, dan ChatGPT untuk dokumen, riset, presentasi, dan otomasi sederhana.</small></div>
     </div>
+  </div>
+</div></section>
 
-    <div class="social-links">
-        <a href="https://www.linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank" aria-label="LinkedIn">
-            <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a href="#" target="_blank" aria-label="GitHub">
-            <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://wa.me/6281911982396" target="_blank" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="https://www.instagram.com/fiqrihfahrezi_?igsi=OXJyNDEydmk4NW9w" target="_blank" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-<<<<<<< HEAD
-        <a href="mailto:fiqrihfahrezi127@gmail.com" aria-label="Email">
-=======
-        <a href="mailto:contactfiqrih@gmail.com" aria-label="Email">
->>>>>>> origin/main
-            <i class="fa-solid fa-envelope"></i>
-        </a>
+<section id="kontak"><div class="wrap">
+  <div class="cta rv">
+    <h2>Punya proyek atau lowongan yang cocok?</h2>
+    <p>Saya terbuka untuk diskusi pengembangan aplikasi web. Kirim pesan, saya balas secepatnya.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn pri" href="mailto:contactfiqrih@gmail.com">Kirim email</a>
+      <div class="cvwrap up"><button type="button" class="btn " aria-haspopup="menu" aria-expanded="false">Lihat CV <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><span class="cvmenu" role="menu"><a role="menuitem" href="cv/cv-id.pdf" target="_blank" rel="noopener"><span class="fl">ID</span><span>Bahasa Indonesia<small>Buka CV format PDF</small></span></a><a role="menuitem" href="cv/cv-en.pdf" target="_blank" rel="noopener"><span class="fl">EN</span><span>English<small>Open CV as PDF</small></span></a></span></div>
+      <a class="btn" href="https://wa.me/6281911982396" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn" href="https://linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-</div>
+  </div>
+</div></section>
+</main>
 
-       <!-- Right - Professional CTA -->
-<div class="contact-cta">
-    <div class="cta-header">
-        <div class="cta-badge">
-            <i class="fa-solid fa-bolt"></i>
-            Available for Work
-        </div>
-        <h3>Ready to Build Something <span>Amazing</span>?</h3>
-    </div>
+<footer>© <span id="yr"></span> Ach. Fiqrih Fahrezi · Sampang, Jawa Timur</footer>
 
-    <!-- Value Props -->
-    <div class="cta-features">
-        <div class="feature">
-            <div class="feature-icon">
-                <i class="fa-solid fa-laptop-code"></i>
-            </div>
-            <div class="feature-text">
-                <h4>Full Stack Developer</h4>
-                <p>Laravel • JavaScript • Python</p>
-            </div>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">
-                <i class="fa-solid fa-clock"></i>
-            </div>
-            <div class="feature-text">
-                <h4>Flexible Working</h4>
-                <p>WFH / WFO / Hybrid</p>
-            </div>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">
-                <i class="fa-solid fa-rocket"></i>
-            </div>
-            <div class="feature-text">
-                <h4>Fast & Reliable</h4>
-                <p>Deadline oriented</p>
-            </div>
-        </div>
-    </div>
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+$('#yr').textContent=new Date().getFullYear();
 
-    <!-- Availability -->
-    <div class="availability">
-        <div class="status">
-            <span class="status-dot"></span>
-            <span class="status-text">Open to Opportunities</span>
-        </div>
-        <p class="availability-text">
-            <i class="fa-regular fa-calendar-check"></i>
-            Siap bergabung dalam <strong>1-7 hari</strong> setelah proses rekrutmen
-        </p>
-    </div>
+/* data */
+const projects=[
+ {t:'Kordik: Koordinasi Pendidikan Klinik',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Sistem web untuk mengoordinasikan pendidikan klinik di rumah sakit, dibangun end-to-end dengan database relasional, backend logika bisnis, dan antarmuka responsif.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
+ {t:'Pendaftaran Direktur Rumah Sakit',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Sistem pendaftaran dan administrasi seleksi calon direktur, mulai dari pengelolaan data calon sampai proses penyaringan.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
+ {t:'Fixora: Pengadaan & Pemeliharaan Barang',c:'rs',tag:'Rumah sakit · RSUD Mohammad Zyn',d:'Digitalisasi pengadaan dan pemeliharaan barang agar manajemen inventaris rumah sakit lebih efisien dan tercatat rapi.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
+ {t:'Sistem Pembelajaran Digital Pesantren',c:'pes',tag:'Pesantren · Proyek akhir',d:'Website pembelajaran untuk santri dan pengajar: pengelolaan materi, data pengguna, dan aktivitas akademik dalam satu sistem.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
+ {t:'Website Manajemen Pondok Pesantren',c:'pes',tag:'Pesantren · Kerja praktik',d:'Aplikasi manajemen dan pendaftaran santri dengan tampilan responsif serta pengelolaan data yang terstruktur.',s:['PHP','Laravel','MySQL','Bootstrap']},
+ {t:'Aplikasi Pengarsipan Dokumen',c:'pri',tag:'Proyek pribadi',d:'Aplikasi web untuk menyimpan, mengelompokkan, dan mencari dokumen secara terstruktur.',s:['PHP','Laravel','MySQL','Bootstrap','JavaScript']},
+ {t:'Web Portofolio Pribadi',c:'pri',tag:'Proyek pribadi',d:'Situs portofolio statis dengan antarmuka responsif untuk menampilkan pengalaman dan proyek.',s:['HTML','CSS','JavaScript']}
+];
+const skills=[
+ ['Pemrograman & web',['PHP','Laravel','HTML & CSS','JavaScript','MySQL','Full-stack','Frontend','Backend','Vibe coding']],
+ ['IT & quality assurance',['Pengujian aplikasi','Debugging','Instalasi software','Instalasi Windows','Troubleshooting hardware & software']],
+ ['Perkantoran & desain',['Microsoft Word','Microsoft Excel','Microsoft PowerPoint','Canva','CapCut']],
+ ['Data & administrasi',['Entri data','Pengolahan data','Pengarsipan dokumen','Research & development']],
+ ['Kecerdasan buatan',['AI untuk produktivitas','AI untuk pengembangan aplikasi','Konten berbantuan AI','Optimasi alur kerja']],
+ ['Soft skills',['Kepemimpinan','Manajemen waktu','Kerja sama tim','Berpikir kritis','Komunikasi','Pemecahan masalah']]
+];
+$('#grid').innerHTML=projects.map((p,i)=>`<article class="card rv" data-c="${p.c}" style="--d:${(i%3)*.08}s"><span class="tag">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p><div class="stack">${p.s.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+$('#skills').innerHTML=skills.map((k,i)=>`<div class="sk rv" style="--d:${(i%3)*.08}s"><h3>${k[0]}</h3><div class="pills">${k[1].map(x=>`<span>${x}</span>`).join('')}</div></div>`).join('');
 
-    <!-- CTA Buttons -->
-<<<<<<< HEAD
-    <div class="cta-actions">
-        <a href="mailto:fiqrihfahrezi127@gmail.com?subject=Lowongan%20Pekerjaan%20-%20Full%20Stack%20Developer&body=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda%20dan%20ingin%20mengundang%20Anda%20untuk%20bergabung%20dengan%20tim%20kami.%0A%0ABerikut%20detail%20lowongan:%0A-%20Posisi:%0A-%20Lokasi:%0A-%20Tipe%20Pekerjaan:%0A%0ATerima%20kasih." 
-=======
-    <!-- <div class="cta-actions">
-        <a href="mailto:contactfiqrih@gmail.com?subject=Lowongan%20Pekerjaan%20-%20Full%20Stack%20Developer&body=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda%20dan%20ingin%20mengundang%20Anda%20untuk%20bergabung%20dengan%20tim%20kami.%0A%0ABerikut%20detail%20lowongan:%0A-%20Posisi:%0A-%20Lokasi:%0A-%20Tipe%20Pekerjaan:%0A%0ATerima%20kasih." 
->>>>>>> origin/main
-           class="cta-btn cta-primary">
-            <i class="fa-regular fa-envelope"></i>
-            Kirim Email
-            <span class="btn-sub">Langsung ke HRD</span>
-        </a>
-        
-        <a href="https://wa.me/6281911982396?text=Halo%20Fiqrih,%0A%0ASaya%20tertarik%20dengan%20portofolio%20Anda.%20Saya%20melihat%20Anda%20seorang%20Full%20Stack%20Developer%20yang%20handal.%0A%0AApakah%20Anda%20saat%20ini%20mencari%20pekerjaan%20atau%20open%20for%20collaboration?%0A%0AMari%20kita%20bicarakan%20lebih%20lanjut." 
-           class="cta-btn cta-whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-            Chat WhatsApp
-            <span class="btn-sub">Respon Cepat</span>
-        </a>
-<<<<<<< HEAD
-    </div>
-=======
-    </div> -->
->>>>>>> origin/main
+/* typing */
+const words=['aplikasi web rumah sakit','sistem inventaris digital','platform belajar online','antarmuka yang mudah dipakai'];
+(function type(){const el=$('#typed');if(reduce){el.textContent=words[0];return}
+ let w=0,c=0,del=false;
+ (function tick(){const full=words[w];el.textContent=full.slice(0,c);
+  if(!del&&c<full.length){c++;setTimeout(tick,70)}
+  else if(!del){del=true;setTimeout(tick,1600)}
+  else if(c>0){c--;setTimeout(tick,32)}
+  else{del=false;w=(w+1)%words.length;setTimeout(tick,300)}})();})();
 
-    <!-- Quick Info -->
-    <div class="quick-info">
-        <div class="info-item">
-            <i class="fa-regular fa-file-pdf"></i>
-            <div>
-                <span>CV / Resume</span>
-<<<<<<< HEAD
-                <a href="cv/cv_fiqrih_fahrezi.pdf" download>
-=======
-                <a href="cv/Ach. Fiqrih Fahrezi.pdf" download>
->>>>>>> origin/main
-                    Download <i class="fa-solid fa-download"></i>
-                </a>
-            </div>
-        </div>
-        <div class="info-item">
-            <i class="fa-brands fa-linkedin"></i>
-            <div>
-                <span>LinkedIn</span>
-                <a href="https://www.linkedin.com/in/fiqrih-fahrezi-729b002b8" target="_blank">
-                    Connect <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-        </div>
-        <div class="info-item">
-            <i class="fa-brands fa-github"></i>
-            <div>
-                <span>GitHub</span>
-                <a href="#" target="_blank">
-                    Portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-        </div>
-    </div>
+/* reveal + counters */
+const count=el=>{const n=+el.dataset.n,f=+el.dataset.f||0;if(reduce){el.textContent=n.toFixed(f);return}
+ const t0=performance.now();(function s(t){const p=Math.min((t-t0)/1400,1),e=1-Math.pow(1-p,4);el.textContent=(n*e).toFixed(f);if(p<1)requestAnimationFrame(s)})(t0)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');$$('[data-n]',e.target).forEach(count);io.unobserve(e.target)}}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
 
-    <!-- Testimonial / Trust -->
-    <div class="trust-badge">
-        <div class="trust-icons">
-            <i class="fa-solid fa-star" style="color: #ffd93d;"></i>
-            <i class="fa-solid fa-star" style="color: #ffd93d;"></i>
-            <i class="fa-solid fa-star" style="color: #ffd93d;"></i>
-            <i class="fa-solid fa-star" style="color: #ffd93d;"></i>
-            <i class="fa-solid fa-star" style="color: #ffd93d;"></i>
-        </div>
-        <span>Ready to contribute to your team's success</span>
-    </div>
-</div>
-</section>
+/* filters */
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+ $$('.chip').forEach(x=>x.classList.toggle('on',x===b));
+ $$('.card').forEach(c=>c.classList.toggle('hide',b.dataset.f!=='all'&&c.dataset.c!==b.dataset.f))});
 
-    <footer>
+/* card tilt + spotlight */
+$$('.card').forEach(c=>{
+ c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');
+  if(!reduce)c.style.transform=`perspective(800px) rotateX(${(.5-y/r.height)*6}deg) rotateY(${(x/r.width-.5)*6}deg) translateY(-4px)`});
+ c.addEventListener('mouseleave',()=>c.style.transform='')});
 
-        © 2026 Fiqrih Fahrezi
+/* scroll: progress, glow, timeline, active nav */
+const links=$$('nav a'),secs=links.map(a=>$(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+ const h=document.documentElement,y=scrollY;
+ $('#bar').style.width=(y/(h.scrollHeight-innerHeight)*100)+'%';
+ const tl=$('#tl').getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.6-tl.top)/tl.height,0),1);
+ $('#fill').style.height=(p*(tl.height-12))+'px';
+ let cur=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+ links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+},{passive:true});
+addEventListener('mousemove',e=>{const g=$('#glow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
 
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+/* cv menu */
+const closeCv=(except)=>$$('.cvwrap.open').forEach(w=>{if(w!==except){w.classList.remove('open');$('button',w).setAttribute('aria-expanded','false')}});
+$$('.cvwrap').forEach(w=>{const b=$('button',w);
+ b.addEventListener('click',e=>{e.stopPropagation();closeCv(w);const o=w.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+document.addEventListener('click',e=>{if(!e.target.closest('.cvwrap'))closeCv()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeCv()});
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16"></script> -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <script src="script.js"></script>
-
+/* theme */
+const root=document.documentElement,tb=$('#theme');
+const setTheme=t=>{root.dataset.theme=t;tb.textContent=t==='dark'?'☀️':'🌙'};
+setTheme(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+tb.addEventListener('click',()=>setTheme(root.dataset.theme==='dark'?'light':'dark'));
+</script>
 </body>
-
 </html>
