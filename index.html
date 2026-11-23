@@ -247,6 +247,19 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
   .cvmenu,.cvwrap.up .cvmenu{position:fixed;left:14px;right:14px;top:auto;bottom:14px;min-width:0;transform-origin:bottom center;transform:translateY(24px)}
   .cvwrap.open .cvmenu,.cvwrap.up.open .cvmenu{transform:none}
 }
+
+/* ===== certificates ===== */
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:18px}
+.cert{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:8px;
+  transition:opacity .8s var(--ease),transform .45s var(--ease),border-color .3s,box-shadow .3s}
+.cert.rv:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 18px 40px rgba(42,28,20,.12)}
+.cert .top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.cert .no{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1;color:var(--teal);opacity:.4;transition:opacity .3s}
+.cert:hover .no{opacity:1}
+.cert h3{font-size:1.1rem;line-height:1.25}
+.cert .by{font-size:.86rem;font-weight:600;color:var(--teal-d)}
+.cert p{color:var(--muted);font-size:.92rem}
+@media(max-width:600px){.cert{padding:20px}}
 </style>
 </head>
 <body>
@@ -254,7 +267,7 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
 
 <nav aria-label="Navigasi utama">
   <a href="#home" class="on">Beranda</a><a href="#tentang">Tentang</a><a href="#pengalaman">Pengalaman</a>
-  <a href="#proyek">Proyek</a><a href="#keahlian">Keahlian</a><a href="#kontak">Kontak</a>
+  <a href="#proyek">Proyek</a><a href="#keahlian">Keahlian</a><a href="#sertifikat">Sertifikat</a><a href="#kontak">Kontak</a>
   <button id="theme" aria-label="Ganti tema terang/gelap">🌙</button>
 </nav>
 
@@ -293,7 +306,7 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
       <div class="stat"><b data-n="7">7</b><span>Proyek web full-stack</span></div>
       <div class="stat"><b data-n="3">3</b><span>Sistem untuk rumah sakit</span></div>
       <div class="stat"><b data-n="3.44" data-f="2">3.44</b><span>IPK S1 Informatika (skala 4)</span></div>
-      <div class="stat"><b data-n="2">2</b><span>Sertifikasi kompetensi</span></div>
+      <div class="stat"><b data-n="7">7</b><span>Sertifikasi kompetensi</span></div>
     </div>
   </div>
 </div></section>
@@ -362,18 +375,30 @@ button.btn{font:inherit;font-weight:600;background:transparent;color:inherit}
   </div>
 </div></section>
 
+<section id="sertifikat"><div class="wrap">
+  <h2 class="rv">Sertifikasi</h2>
+  <p class="lead rv">Belajar terus di luar bangku kuliah: 7 sertifikasi dari 2024 sampai 2026.</p>
+  <div class="certs">
+    <article class="cert rv" style="--d:0.0s"><div class="top"><span class="no">01</span><span class="tag">Pemrograman · 2024</span></div><h3>Python Fundamental</h3><div class="by">Aguna Course</div><p>Sintaks dasar, tipe data, percabangan, perulangan, fungsi, dan modul Python.</p></article>
+    <article class="cert rv" style="--d:0.08s"><div class="top"><span class="no">02</span><span class="tag">Kecerdasan buatan · 2026</span></div><h3>AI untuk Produktivitas Kerja Harian</h3><div class="by">PT Sumber Belajar Bersama (Edukasa)</div><p>Pelatihan nasional memakai Claude, Gemini, dan ChatGPT untuk dokumen, riset, presentasi, dan otomasi sederhana.</p></article>
+    <article class="cert rv" style="--d:0.16s"><div class="top"><span class="no">03</span><span class="tag">Web · 2026</span></div><h3>Build a Free Website with WordPress</h3><div class="by">Coursera</div><p>Membuat website mandiri dengan WordPress, termasuk tema, halaman, menu navigasi, dan konten.</p></article>
+    <article class="cert rv" style="--d:0.0s"><div class="top"><span class="no">04</span><span class="tag">Data · 2026</span></div><h3>Lookup, Reference, Math and Text Functions in Excel</h3><div class="by">Coursera</div><p>Fungsi Lookup, Reference, matematika, dan teks di Excel untuk mengolah data lebih cepat dan teliti.</p></article>
+    <article class="cert rv" style="--d:0.08s"><div class="top"><span class="no">05</span><span class="tag">Manajemen proyek · 2026</span></div><h3>Introduction to Project Management with ClickUp</h3><div class="by">Coursera</div><p>Dasar manajemen proyek dan ClickUp untuk mengelola tugas, timeline, kolaborasi, dan memantau progres.</p></article>
+    <article class="cert rv" style="--d:0.16s"><div class="top"><span class="no">06</span><span class="tag">Software development · 2026</span></div><h3>Engineers & Developers Essentials (Mekari O-Celess Gen 2)</h3><div class="by">Mekari</div><p>Dasar engineering dan pengembangan perangkat lunak: tools, workflow, dan praktik kerja di dunia teknologi.</p></article>
+    <article class="cert rv" style="--d:0.0s"><div class="top"><span class="no">07</span><span class="tag">Data · 2026</span></div><h3>Build Your First Operational Dashboard: Warehouse Transfers</h3><div class="by">Kursus daring</div><p>Membuat dashboard operasional untuk memantau transfer barang antar gudang dan mengambil keputusan berbasis data.</p></article>
+  </div>
+</div></section>
+
 <section id="pendidikan"><div class="wrap">
-  <h2 class="rv">Pendidikan & sertifikasi</h2>
+  <h2 class="rv">Pendidikan</h2>
   <div class="two" style="margin-top:34px">
     <div class="box rv">
-      <h3>Pendidikan</h3>
+      <h3>Perguruan tinggi</h3>
       <div class="item"><b>S1 Informatika, Fakultas Teknik</b><small>Universitas Madura, Pamekasan · 2020 – 2024</small><small>IPK 3.44 / 4.00</small></div>
-      <div class="item"><b>Jurusan Ilmu Pengetahuan Sosial</b><small>SMA Negeri 1 Sampang, Madura · 2017 – 2020</small><small>Nilai 88.47</small></div>
     </div>
     <div class="box rv" style="--d:.12s">
-      <h3>Sertifikasi kompetensi</h3>
-      <div class="item"><b>Python Fundamental</b><small>Aguna Course · 2024</small><small>Sintaks dasar, tipe data, percabangan, perulangan, fungsi, dan modul.</small></div>
-      <div class="item"><b>AI untuk Produktivitas Kerja Harian</b><small>PT Sumber Belajar Bersama (Edukasa) · 2026</small><small>Claude, Gemini, dan ChatGPT untuk dokumen, riset, presentasi, dan otomasi sederhana.</small></div>
+      <h3>Sekolah menengah</h3>
+      <div class="item"><b>Jurusan Ilmu Pengetahuan Sosial</b><small>SMA Negeri 1 Sampang, Madura · 2017 – 2020</small><small>Nilai 88.47</small></div>
     </div>
   </div>
 </div></section>
